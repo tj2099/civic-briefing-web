@@ -53,7 +53,7 @@ const explainers: Explainer[] = [
 
 export default function SamplePage() {
   const [activeSection, setActiveSection] = useState<SectionId>("summary");
-  const refs = useRef<Record<SectionId, HTMLDivElement | null>>({
+  const refs = useRef<Record<SectionId, HTMLElement | null>>({
     summary: null,
     "top-items": null,
     "more-actions": null,
@@ -78,7 +78,7 @@ export default function SamplePage() {
       },
     );
 
-    const elements = Object.values(refs.current).filter((el): el is HTMLDivElement => el !== null);
+    const elements = Object.values(refs.current).filter((el): el is HTMLElement => el !== null);
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
