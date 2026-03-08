@@ -14,29 +14,29 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#ECEBE9] text-[#1A2A44]">
-      <div className="h-[3px] w-full bg-[#F2B705]" />
+      <div className="h-[2px] w-full bg-[#F2B705]" />
 
       <header className="border-b border-[#C9CDD4]">
-        <div className="mx-auto max-w-7xl px-6 py-7 text-center md:py-8">
-          <p className="text-5xl font-semibold tracking-tight text-[#1E222C] [font-family:Georgia,'Times_New_Roman',serif] md:text-6xl">
+        <div className="mx-auto max-w-[1320px] px-6 py-8 text-center md:px-10 md:py-9">
+          <p className="text-5xl font-semibold tracking-tight text-[#1E222C] [font-family:Georgia,'Times_New_Roman',serif] md:text-[4.2rem]">
             CitySmart
           </p>
         </div>
       </header>
 
-      <main className="mx-auto grid w-full max-w-7xl gap-14 px-6 py-14 md:grid-cols-[minmax(0,560px)_minmax(0,520px)] md:justify-between md:items-center md:gap-20 md:py-20">
-        <section className="max-w-[560px] md:pt-8">
-          <h1 className="text-[3.35rem] font-semibold leading-[0.99] tracking-tight text-[#1A2A44] [font-family:Georgia,'Times_New_Roman',serif] md:text-[5.2rem]">
+      <main className="mx-auto grid w-full max-w-[1320px] gap-12 px-6 pb-16 pt-14 md:grid-cols-[45%_55%] md:gap-24 md:px-10 md:pb-24 md:pt-24">
+        <section className="max-w-[620px] md:pt-14">
+          <h1 className="max-w-[600px] text-[clamp(3.5rem,5vw,5.5rem)] font-semibold leading-[0.98] tracking-tight text-[#1A2A44] [font-family:Georgia,'Times_New_Roman',serif]">
             City news, but only what matters.
           </h1>
 
-          <p className="mt-8 max-w-[520px] text-[1.05rem] leading-[1.5] text-[#23344F] md:text-[1.05rem]">
+          <p className="mt-8 max-w-[480px] text-[1.03rem] leading-[1.55] text-[#23344F] md:text-[1.06rem]">
             CitySmart sends a civic digest to your inbox each week with clear, concise updates from local government.
             Stay informed without reading hours of agendas and meeting transcripts.
           </p>
 
-          <form className="mt-9 max-w-[520px]" onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-3 sm:flex-row">
+          <form className="mt-8 max-w-[520px]" onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
               <label className="sr-only" htmlFor="email">
                 Email
               </label>
@@ -51,7 +51,7 @@ export default function Home() {
               />
               <button
                 type="submit"
-                className="h-14 border border-[#1D2430] bg-[#1D2430] px-8 text-sm font-semibold tracking-[0.06em] text-[#F2B705] transition hover:bg-[#161D28]"
+                className="h-14 border border-[#1D2430] bg-[#1D2430] px-8 text-sm font-semibold tracking-[0.06em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
               >
                 GET WEEKLY BRIEFINGS
               </button>
@@ -80,7 +80,7 @@ export default function Home() {
           <div className="mt-8 max-w-[520px] border-t border-[#BCC2CD] pt-6">
             <Link
               href="/sample"
-              className="inline-flex items-center gap-3 text-2xl font-medium tracking-tight text-[#1A2A44] transition hover:text-[#0B2545]"
+              className="inline-flex items-center gap-3 text-[1.4rem] font-medium tracking-tight text-[#1A2A44] transition hover:text-[#0B2545] md:text-[1.65rem]"
             >
               <span>Read last week’s newsletter</span>
               <span className="text-[#F2B705]">→</span>
@@ -88,12 +88,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="flex justify-center md:justify-end md:py-4">
-          <div className="w-full max-w-[560px] rounded-[58px] border-[4px] border-[#F2B705] bg-[#ECEBE9] p-5 md:max-w-[540px] md:p-7">
-            <div className="rounded-[40px] border border-[#CDD3DC] bg-[#F2F3F2] p-5 md:p-6">
+        <section className="flex justify-center md:justify-end md:pt-10">
+          <div className="w-full max-w-[560px] rounded-[52px] border-[3px] border-[#F2B705] bg-[#ECEBE9] p-4 md:max-w-[560px] md:p-5">
+            <div className="rounded-[38px] border border-[#CDD3DC] bg-[#F2F3F2] p-4 md:p-5">
               <div className="flex items-center justify-between text-[#C4C8CF]">
-                <span className="text-[2.75rem] leading-none">‹</span>
-                <span className="text-[2.5rem] leading-none">···</span>
+                <span className="text-[2.45rem] leading-none">‹</span>
+                <span className="text-[2.3rem] leading-none">···</span>
               </div>
 
               <div className="mt-4 flex items-center gap-3 px-1">
@@ -107,17 +107,17 @@ export default function Home() {
               </div>
 
               <article className="mt-6 overflow-hidden rounded-[18px] border border-[#CDD3DC] bg-[#F8F8F8]">
-                <div className="h-[5px] w-full bg-[#F2B705]" />
+                <div className="h-1.5 w-full bg-[#F2B705]" />
                 <div className="border-b border-[#D6DCE6] px-6 py-7 text-center">
                   <p className="text-2xl font-semibold text-[#1A2A44] [font-family:Georgia,'Times_New_Roman',serif] md:text-3xl">
                     CitySmart
                   </p>
-                  <h2 className="mt-1 text-5xl font-semibold leading-[0.98] text-[#1A2A44] [font-family:Georgia,'Times_New_Roman',serif] md:text-[4.2rem]">
+                  <h2 className="mt-1 text-5xl font-semibold leading-[0.98] text-[#1A2A44] [font-family:Georgia,'Times_New_Roman',serif] md:text-[4rem]">
                     Weekly Edition
                   </h2>
                 </div>
                 <div className="px-6 py-6">
-                  <div className="mx-auto flex h-56 w-full max-w-[260px] items-center justify-center rounded-xl border border-[#D7DEE8] bg-white text-8xl">
+                  <div className="mx-auto flex h-60 w-full max-w-[280px] items-center justify-center rounded-xl border border-[#D7DEE8] bg-white text-8xl">
                     🏛️
                   </div>
                   <p className="mt-6 text-[1.05rem] leading-[1.45] text-[#3E495F]">
