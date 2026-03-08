@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 export default function Home() {
@@ -25,12 +26,13 @@ export default function Home() {
 
       <main className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
         <section className="max-w-xl">
-          <h1 className="text-5xl font-semibold leading-[1.04] tracking-tight text-[#1A2A44] md:text-8xl [font-family:Georgia,'Times_New_Roman',serif]">
+          <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight text-[#1A2A44] md:text-[5.5rem] [font-family:Georgia,'Times_New_Roman',serif]">
             City news, but only what matters.
           </h1>
 
-          <p className="mt-8 text-xl leading-relaxed text-[#23344F] md:text-[2rem]">
-            CitySmart sends a civic digest to your inbox each week with clear, concise updates from local government. Stay informed without reading hours of agendas and meeting transcripts.
+          <p className="mt-8 text-xl leading-relaxed text-[#23344F] md:text-[2.1rem]">
+            CitySmart sends a civic digest to your inbox each week with clear, concise updates from local government.
+            Stay informed without reading hours of agendas and meeting transcripts.
           </p>
 
           <form className="mt-10" onSubmit={handleSubmit}>
@@ -51,7 +53,7 @@ export default function Home() {
                 type="submit"
                 className="h-14 border border-[#1D2430] bg-[#1D2430] px-8 text-sm font-semibold tracking-[0.08em] text-[#F2B705] transition hover:bg-[#121722]"
               >
-                WAKE UP INFORMED
+                SUBSCRIBE
               </button>
             </div>
 
@@ -63,7 +65,7 @@ export default function Home() {
                 id="city"
                 value={city}
                 onChange={(event) => setCity(event.target.value)}
-                className="h-12 w-full max-w-xs border border-[#C9CDD4] bg-white px-3 text-sm text-[#23344F] outline-none focus:border-[#1A2A44]"
+                className="h-12 w-full max-w-[540px] border border-[#2C3440] bg-[#ECEBE9] px-3 text-sm font-medium text-[#1A2A44] outline-none focus:border-[#1A2A44]"
               >
                 <option>San Francisco</option>
                 <option>Seattle</option>
@@ -74,6 +76,16 @@ export default function Home() {
               </select>
             </div>
           </form>
+
+          <div className="mt-10 max-w-[540px] border-t border-[#B9C0CB] pt-7">
+            <Link
+              href="/sample"
+              className="inline-flex items-center gap-3 text-2xl font-medium tracking-tight text-[#1A2A44] transition hover:text-[#0B2545]"
+            >
+              <span>Read last week’s newsletter</span>
+              <span className="text-[#F2B705]">→</span>
+            </Link>
+          </div>
         </section>
 
         <section className="flex justify-center md:justify-end">
@@ -85,7 +97,9 @@ export default function Home() {
               </div>
 
               <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F2B705] text-sm font-bold text-white">C</div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F2B705] text-sm font-bold text-white">
+                  C
+                </div>
                 <div className="space-y-2">
                   <div className="h-2 w-20 rounded-full bg-[#E4E7EC]" />
                   <div className="h-2 w-12 rounded-full bg-[#ECEEF2]" />
@@ -107,7 +121,8 @@ export default function Home() {
                     🏛️
                   </div>
                   <p className="mt-6 text-lg leading-relaxed text-[#3A475E]">
-                    Important city decisions do not need to be buried in PDFs. CitySmart highlights policy votes, budget moves, and neighborhood impacts in one clean weekly briefing.
+                    Important city decisions do not need to be buried in PDFs. CitySmart highlights policy votes,
+                    budget moves, and neighborhood impacts in one clean weekly briefing.
                   </p>
                 </div>
               </article>
