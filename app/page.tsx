@@ -24,7 +24,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1320px] px-6 md:px-10">
+      <main className="mx-auto w-full max-w-[1280px] px-6 md:px-14 lg:px-16">
         <section className="pb-14 pt-12 md:hidden">
           <div className="max-w-[390px]">
             <h1 className="text-[clamp(3rem,11vw,4.35rem)] font-semibold leading-[0.98] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
@@ -94,7 +94,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="hidden md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-20 md:pb-20 md:pt-16">
+        <section className="hidden md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-16 lg:gap-20 md:pb-20 md:pt-16">
           <div className="max-w-[600px]">
             <h1 className="max-w-[580px] text-[clamp(3.75rem,5vw,5.35rem)] font-semibold leading-[0.97] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
               City news, but only what matters.
@@ -159,7 +159,7 @@ export default function Home() {
           </div>
 
           <div className="flex justify-start">
-            <div className="w-full max-w-[520px] rounded-[52px] border-[3px] border-[#F2B705] bg-[#ECEBE9] p-4 md:max-w-[520px] md:p-5">
+            <div className="w-full max-w-[470px] rounded-[52px] border-[3px] border-[#F2B705] bg-[#ECEBE9] p-4 md:max-w-[470px] lg:max-w-[500px] md:p-5">
               <div className="rounded-[38px] border border-[#CDD3DC] bg-[#F2F3F2] p-4 md:p-5">
                 <div className="flex items-center justify-between text-[#C4C8CF]">
                   <span className="text-[2.45rem] leading-none">‹</span>
