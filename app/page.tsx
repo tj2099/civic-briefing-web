@@ -5,28 +5,72 @@ import { FormEvent, useState } from "react";
 import HeroNewsletterAnimation from "./components/HeroNewsletterAnimation";
 import { supabase } from "@/lib/supabase";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export default function Home() {
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("San Francisco");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<string>("");
+  const [submitError, setSubmitError] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("signup submit fired", { email, city });
+    setIsSubmitting(true);
+    setSubmitMessage("");
+    setSubmitError(false);
+    try {
+      const normalizedEmail = email.trim().toLowerCase();
+      if (!normalizedEmail || normalizedEmail.length > 254 || !EMAIL_REGEX.test(normalizedEmail)) {
+        setSubmitError(true);
+        setSubmitMessage("Please enter a valid email address.");
+        return;
+      }
 
-    const cityId = city.toLowerCase().replace(/\s+/g, "-");
+      const fallbackCityId = city.toLowerCase().replace(/\s+/g, "-");
+      let cityId: string | number = fallbackCityId;
 
-    const { error } = await supabase.from("subscribers").insert({
-      email: email.trim(),
-      city_id: cityId,
-      status: "active",
-    });
+      // Try to resolve a canonical city id first; fall back to slug if lookup is unavailable.
+      const cityLookup = await supabase.from("cities").select("id").eq("name", city).maybeSingle();
+      if (cityLookup.error) {
+        console.warn("city lookup failed, using fallback city_id", cityLookup.error);
+      } else if (cityLookup.data?.id !== undefined && cityLookup.data?.id !== null) {
+        cityId = cityLookup.data.id;
+      }
 
-    if (error) {
-      console.error("signup insert failed", error);
-      return;
+      const { error } = await supabase.from("subscribers").insert({
+        email: normalizedEmail,
+        city_id: cityId,
+        status: "active",
+      });
+
+      if (error) {
+        const isDuplicate =
+          error.code === "23505" || /duplicate key value/i.test(error.message || "");
+        if (isDuplicate) {
+          console.warn("signup duplicate", error);
+          setSubmitError(false);
+          setSubmitMessage("You’re already subscribed to this city");
+          return;
+        }
+        console.error("signup insert failed", error);
+        setSubmitError(true);
+        setSubmitMessage(error.message || "Signup failed. Check console for details.");
+        return;
+      }
+
+      console.log("signup insert succeeded", { email: normalizedEmail, city_id: cityId });
+      setSubmitError(false);
+      setSubmitMessage("Thanks — you're on the list.");
+      setEmail("");
+    } catch (err) {
+      console.error("signup submit exception", err);
+      setSubmitError(true);
+      setSubmitMessage("Signup failed. Check console for details.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    console.log("signup insert succeeded", { email: email.trim(), city_id: cityId });
   };
 
   return (
@@ -70,9 +114,10 @@ export default function Home() {
                 />
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="h-[3.25rem] appearance-none border border-[#1D2430] bg-[#1D2430] px-4 text-[11px] font-semibold tracking-[0.04em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
                 >
-                  GET BRIEFINGS
+                  {isSubmitting ? "SUBMITTING..." : "GET BRIEFINGS"}
                 </button>
               </div>
 
@@ -95,6 +140,11 @@ export default function Home() {
                 </select>
               </div>
             </form>
+            {submitMessage ? (
+              <p className={`mt-3 max-w-[360px] text-sm ${submitError ? "text-[#B42318]" : "text-[#16794C]"}`}>
+                {submitMessage}
+              </p>
+            ) : null}
 
             <div className="mt-8 max-w-[360px] border-t border-[#BCC2CD] pt-5">
               <Link
@@ -137,9 +187,10 @@ export default function Home() {
                 />
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="h-14 border border-[#1D2430] bg-[#1D2430] px-8 text-sm font-semibold tracking-[0.06em] text-[#F2B705] transition hover:bg-[#161D28] whitespace-nowrap"
                 >
-                  GET BRIEFINGS
+                  {isSubmitting ? "SUBMITTING..." : "GET BRIEFINGS"}
                 </button>
               </div>
 
@@ -162,6 +213,11 @@ export default function Home() {
                 </select>
               </div>
             </form>
+            {submitMessage ? (
+              <p className={`mt-3 max-w-[500px] text-sm ${submitError ? "text-[#B42318]" : "text-[#16794C]"}`}>
+                {submitMessage}
+              </p>
+            ) : null}
 
             <div className="mt-7 max-w-[500px] border-t border-[#BCC2CD] pt-6">
               <Link
