@@ -54,7 +54,7 @@ export default function Home() {
                 />
                 <button
                   type="submit"
-                  className="h-14 appearance-none border border-[#1D2430] bg-[#1D2430] px-4 text-[11px] font-semibold tracking-[0.04em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
+                  className="h-[3.25rem] appearance-none border border-[#1D2430] bg-[#1D2430] px-4 text-[11px] font-semibold tracking-[0.04em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
                 >
                   GET BRIEFINGS
                 </button>
@@ -68,7 +68,7 @@ export default function Home() {
                   id="city-mobile"
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
-                  className="h-14 w-full appearance-none border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
+                  className="h-[3.25rem] w-full appearance-none border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
                 >
                   <option>San Francisco</option>
                   <option>Seattle</option>
