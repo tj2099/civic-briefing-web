@@ -28,7 +28,7 @@ export default function Home() {
       <main className="mx-auto w-full max-w-[1240px] px-5 sm:px-6 md:px-20 lg:px-24">
         <section className="pb-14 pt-12 md:hidden">
           <div className="mx-auto max-w-[460px]">
-            <h1 className="text-[clamp(3rem,11vw,4.35rem)] font-semibold leading-[0.98] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
+            <h1 className="text-[clamp(2.6rem,9.2vw,3.8rem)] font-semibold leading-[0.98] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
               <span className="block whitespace-nowrap">From City Hall,</span>
               <span className="block whitespace-nowrap">to your inbox</span>
             </h1>
@@ -50,11 +50,11 @@ export default function Home() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="EMAIL"
                   required
-                  className="h-12 min-w-0 flex-1 border border-[#313745] bg-[#ECEBE9] px-3 text-sm font-semibold tracking-[0.09em] text-[#1A2A44] outline-none placeholder:text-[#858D99] focus:border-[#1A2A44]"
+                  className="h-14 min-w-0 flex-1 appearance-none border border-[#313745] bg-[#ECEBE9] px-3 text-sm font-semibold tracking-[0.09em] text-[#1A2A44] outline-none placeholder:text-[#858D99] focus:border-[#1A2A44]"
                 />
                 <button
                   type="submit"
-                  className="h-12 border border-[#1D2430] bg-[#1D2430] px-4 text-[11px] font-semibold tracking-[0.04em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
+                  className="h-14 appearance-none border border-[#1D2430] bg-[#1D2430] px-4 text-[11px] font-semibold tracking-[0.04em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
                 >
                   GET BRIEFINGS
                 </button>
@@ -68,7 +68,7 @@ export default function Home() {
                   id="city-mobile"
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
-                  className="h-12 w-full border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
+                  className="h-14 w-full appearance-none border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
                 >
                   <option>San Francisco</option>
                   <option>Seattle</option>
