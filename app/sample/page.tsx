@@ -98,11 +98,17 @@ export default function SamplePage() {
         <div className="relative mx-auto max-w-[1320px] px-6 py-5 text-center md:px-10 md:py-6">
           <Link
             href="/"
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-sm font-medium tracking-wide text-[#5B6472] transition hover:text-[#0B2545] md:left-10"
+            className="absolute left-6 top-1/2 hidden -translate-y-1/2 text-sm font-medium tracking-wide text-[#5B6472] transition hover:text-[#0B2545] md:left-10 md:inline-block"
           >
             ← Back to home
           </Link>
-          <p className="text-4xl font-semibold tracking-tight text-[#1E222C] [font-family:Georgia,'Times_New_Roman',serif] md:text-[1.9rem]">
+          <Link
+            href="/"
+            className="text-4xl font-semibold tracking-tight text-[#1E222C] [font-family:Georgia,'Times_New_Roman',serif] md:hidden"
+          >
+            CitySmart
+          </Link>
+          <p className="hidden text-4xl font-semibold tracking-tight text-[#1E222C] [font-family:Georgia,'Times_New_Roman',serif] md:block md:text-[1.9rem]">
             CitySmart
           </p>
         </div>
@@ -115,7 +121,7 @@ export default function SamplePage() {
             CitySmart, explained
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#5B6472]">
-            See CitySmart turns a full week of San Francisco Board of Supervisors activity into a weekly briefing.
+            See how CitySmart turns a full week of San Francisco Board of Supervisors activity into a weekly briefing.
             <span className="hidden md:inline">
               {" "}
               As you scroll, each explainer maps to the matching section in the newsletter.
@@ -166,12 +172,12 @@ export default function SamplePage() {
                     San Francisco - Board of Supervisors
                   </p>
 
-                  <div className="mt-4 flex items-center gap-0 md:gap-4">
+                  <div className="mt-4 flex items-center justify-center gap-0 md:justify-start md:gap-4">
                     <div className="hidden h-12 w-12 items-center justify-center rounded-full bg-gradient-to-b from-[#F2B705] to-[#E9A800] text-xl shadow-sm ring-1 ring-[#D7DEE8] md:flex">
                       🌉
                     </div>
-                    <div>
-                      <h2 className="text-5xl font-semibold leading-[1.05] tracking-tight text-[#0B2545] [font-family:Georgia,'Times_New_Roman',serif] md:text-6xl">
+                    <div className="text-center md:text-left">
+                      <h2 className="whitespace-nowrap text-[2rem] font-semibold leading-[1.02] tracking-tight text-[#0B2545] [font-family:Georgia,'Times_New_Roman',serif] sm:text-[2.35rem] md:text-6xl">
                         SF BOS Weekly
                       </h2>
                       <p className="mt-2 text-sm text-[#5B6472] md:text-[16px]">Friday, March 06, 2026</p>
@@ -329,3 +335,4 @@ export default function SamplePage() {
     </div>
   );
 }
+

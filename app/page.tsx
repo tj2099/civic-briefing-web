@@ -68,7 +68,7 @@ export default function Home() {
                   id="city-mobile"
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
-                  className="h-10 w-full border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
+                  className="h-12 w-full border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
                 >
                   <option>San Francisco</option>
                   <option>Seattle</option>
