@@ -25,9 +25,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1240px] px-8 md:px-20 lg:px-24">
+      <main className="mx-auto w-full max-w-[1240px] px-5 sm:px-6 md:px-20 lg:px-24">
         <section className="pb-14 pt-12 md:hidden">
-          <div className="max-w-[460px]">
+          <div className="mx-auto max-w-[460px]">
             <h1 className="text-[clamp(3rem,11vw,4.35rem)] font-semibold leading-[0.98] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
               <span className="block whitespace-nowrap">From City Hall,</span>
               <span className="block whitespace-nowrap">to your inbox</span>
@@ -80,10 +80,6 @@ export default function Home() {
               </div>
             </form>
 
-            <p className="mt-4 max-w-[360px] text-xs leading-relaxed text-[#5B6472]">
-              By subscribing you agree to our privacy policy and terms of use.
-            </p>
-
             <div className="mt-8 max-w-[360px] border-t border-[#BCC2CD] pt-5">
               <Link
                 href="/sample"
@@ -94,9 +90,6 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="mt-10">
-              <HeroNewsletterAnimation compact />
-            </div>
           </div>
         </section>
 

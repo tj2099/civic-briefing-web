@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -115,13 +115,16 @@ export default function SamplePage() {
             CitySmart, explained
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#5B6472]">
-            See CitySmart turns a full week of San Francisco Board of Supervisors activity into a weekly briefing. As
-            you scroll, each explainer maps to the matching section in the newsletter.
+            See CitySmart turns a full week of San Francisco Board of Supervisors activity into a weekly briefing.
+            <span className="hidden md:inline">
+              {" "}
+              As you scroll, each explainer maps to the matching section in the newsletter.
+            </span>
           </p>
         </div>
 
         <div className="mt-10 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,680px)] md:items-start">
-          <section className="order-1 space-y-8 md:space-y-12">
+          <section className="order-1 hidden space-y-6 md:block md:space-y-7">
             {explainers.map((item) => {
               const active = activeSection === item.id;
               return (
@@ -132,15 +135,12 @@ export default function SamplePage() {
                     refs.current[item.id] = el;
                   }}
                   className={[
-                    "rounded-2xl border bg-white/70 p-6 transition-all duration-300 md:min-h-[62vh] md:p-8",
+                    "rounded-2xl border bg-white/70 p-6 transition-all duration-300 md:p-7",
                     active ? "border-[#F2B705] shadow-lg shadow-[#0B2545]/8" : "border-[#D7DEE8]",
                   ].join(" ")}
                 >
                   <div className="mb-5 flex items-center gap-3">
-                    <div className={[
-                      "h-px w-10 transition-colors",
-                      active ? "bg-[#F2B705]" : "bg-[#D7DEE8]",
-                    ].join(" ")} />
+                    <div className={["h-px w-10 transition-colors", active ? "bg-[#F2B705]" : "bg-[#D7DEE8]"].join(" ")} />
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#5B6472]">{item.label}</p>
                   </div>
                   <h2 className="text-2xl font-semibold leading-tight tracking-tight [font-family:Georgia,'Times_New_Roman',serif] md:text-3xl">
@@ -166,8 +166,8 @@ export default function SamplePage() {
                     San Francisco - Board of Supervisors
                   </p>
 
-                  <div className="mt-4 flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-b from-[#F2B705] to-[#E9A800] text-xl shadow-sm ring-1 ring-[#D7DEE8]">
+                  <div className="mt-4 flex items-center gap-0 md:gap-4">
+                    <div className="hidden h-12 w-12 items-center justify-center rounded-full bg-gradient-to-b from-[#F2B705] to-[#E9A800] text-xl shadow-sm ring-1 ring-[#D7DEE8] md:flex">
                       🌉
                     </div>
                     <div>
@@ -201,7 +201,12 @@ export default function SamplePage() {
                   </section>
 
                   <section id="top-items" className={newsletterSectionClass("top-items")}>
-                    <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0B2545]">Top items</h3>
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#F9FBFF] text-base ring-1 ring-[#D7DEE8]">
+                        ✅
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0B2545]">Top items</h3>
+                    </div>
                     <div className="mt-4 space-y-3">
                       <article className="rounded-xl border border-[#D7DEE8] bg-[#FBFAF7] p-4">
                         <div className="flex items-start justify-between gap-3">
@@ -216,6 +221,42 @@ export default function SamplePage() {
                           Supervisors approved financing and grant alignment to accelerate affordable units and improve
                           transit access to the island.
                         </p>
+                        <div className="mt-3 overflow-hidden rounded-lg border border-[#D7DEE8] bg-white">
+                          <svg
+                            viewBox="0 0 600 280"
+                            className="block h-auto w-full"
+                            role="img"
+                            aria-label="Map preview of Treasure Island, San Francisco"
+                          >
+                            <rect x="0" y="0" width="600" height="280" fill="#D9E7FA" />
+                            <path
+                              d="M0 0 C120 40, 170 95, 215 132 C252 162, 245 204, 210 280 L0 280 Z"
+                              fill="#C6D8B7"
+                            />
+                            <path
+                              d="M600 0 C520 36, 470 86, 438 128 C402 172, 415 222, 448 280 L600 280 Z"
+                              fill="#C6D8B7"
+                            />
+                            <ellipse cx="322" cy="154" rx="54" ry="24" fill="#D0DFBF" />
+                            <path d="M118 188 L318 160 L482 132" stroke="#AAB8D0" strokeWidth="10" strokeLinecap="round" />
+                            <path d="M158 214 L320 176 L446 150" stroke="#BBC7DA" strokeWidth="7" strokeLinecap="round" />
+                            <g transform="translate(322 154)">
+                              <circle cx="0" cy="0" r="13" fill="#0B2545" />
+                              <path d="M-8.2 4.1 V-1.5 L0 -8.1 L8.2 -1.5 V4.1 Z" fill="#F2B705" />
+                              <rect x="-2.8" y="0.1" width="5.6" height="4" rx="0.7" fill="#0B2545" />
+                            </g>
+                            <text x="341" y="159" fontSize="14" fontWeight="700" fill="#0B2545">
+                              Treasure Island
+                            </text>
+                            <text x="48" y="56" fontSize="12" fontWeight="600" fill="#5B6472">
+                              San Francisco
+                            </text>
+                            <text x="492" y="62" fontSize="12" fontWeight="600" fill="#5B6472">
+                              Oakland
+                            </text>
+                          </svg>
+                        </div>
+                        <p className="mt-2 text-xs text-[#5B6472]">Treasure Island, San Francisco</p>
                       </article>
                       <article className="rounded-xl border border-[#D7DEE8] bg-white p-4">
                         <h4 className="text-sm font-semibold leading-snug text-[#0B2545]">
@@ -239,7 +280,12 @@ export default function SamplePage() {
                   </section>
 
                   <section id="more-actions" className={newsletterSectionClass("more-actions")}>
-                    <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0B2545]">More actions</h3>
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#F9FBFF] text-base ring-1 ring-[#D7DEE8]">
+                        🗂️
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0B2545]">More actions</h3>
+                    </div>
                     <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#5B6472]">
                       <li>Shared Spaces streamlining legislation advanced to next reading with technical amendments.</li>
                       <li>Controller reporting cadence was tightened for major infrastructure expenditures.</li>
@@ -248,12 +294,31 @@ export default function SamplePage() {
                   </section>
 
                   <section id="watchlist" className={newsletterSectionClass("watchlist")}>
-                    <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0B2545]">Watchlist</h3>
-                    <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#5B6472]">
-                      <li>Final vote timing for Fire Code updates and related enforcement rules.</li>
-                      <li>Port implementation milestones and contractor selection transparency.</li>
-                      <li>Treasury and grant disbursement pacing for Treasure Island housing delivery.</li>
-                    </ul>
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#F9FBFF] text-base ring-1 ring-[#D7DEE8]">
+                        👁️
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0B2545]">Watchlist</h3>
+                    </div>
+                    <div className="mt-4 space-y-4 text-sm leading-relaxed text-[#5B6472]">
+                      <div>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0B2545]">
+                          Public safety and emergency response
+                        </p>
+                        <ul className="mt-1 space-y-1">
+                          <li>Final vote timing for Fire Code updates and related enforcement rules.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0B2545]">
+                          Housing and infrastructure delivery
+                        </p>
+                        <ul className="mt-1 space-y-1">
+                          <li>Port implementation milestones and contractor selection transparency.</li>
+                          <li>Treasury and grant disbursement pacing for Treasure Island housing delivery.</li>
+                        </ul>
+                      </div>
+                    </div>
                   </section>
                 </div>
               </div>
