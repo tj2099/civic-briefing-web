@@ -3,14 +3,30 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import HeroNewsletterAnimation from "./components/HeroNewsletterAnimation";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("San Francisco");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ email, city });
+    console.log("signup submit fired", { email, city });
+
+    const cityId = city.toLowerCase().replace(/\s+/g, "-");
+
+    const { error } = await supabase.from("subscribers").insert({
+      email: email.trim(),
+      city_id: cityId,
+      status: "active",
+    });
+
+    if (error) {
+      console.error("signup insert failed", error);
+      return;
+    }
+
+    console.log("signup insert succeeded", { email: email.trim(), city_id: cityId });
   };
 
   return (
