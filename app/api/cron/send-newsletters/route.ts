@@ -3,12 +3,6 @@ import { supabaseAdmin } from "@/src/lib/supabase-admin";
 import { sendIssueInBatches } from "@/src/lib/newsletter-mailer";
 import { ALLOWED_CITY_NAMES, AVAILABLE_CITIES } from "@/src/lib/cities";
 
-const CRON_SECRET = process.env.CRON_SECRET;
-
-if (!CRON_SECRET) {
-  throw new Error("Missing CRON_SECRET");
-}
-
 // Vercel cron schedules are UTC. This project uses Tuesday 18:00 UTC in vercel.json,
 // which matches 10:00 AM Pacific during PST and shifts to 11:00 AM during PDT.
 
@@ -30,11 +24,13 @@ type SubscriberRow = {
 };
 
 function isAuthorized(request: NextRequest) {
+  const cronSecret = process.env.CRON_SECRET;
+  if (!cronSecret) throw new Error("Missing CRON_SECRET");
   const bearer = request.headers.get("authorization");
   const xCronSecret = request.headers.get("x-cron-secret");
 
-  if (bearer === `Bearer ${CRON_SECRET}`) return true;
-  if (xCronSecret === CRON_SECRET) return true;
+  if (bearer === `Bearer ${cronSecret}`) return true;
+  if (xCronSecret === cronSecret) return true;
   return false;
 }
 

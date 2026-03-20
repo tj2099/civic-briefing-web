@@ -3,18 +3,22 @@ import { Resend } from "resend";
 
 const CHUNK_SIZE = 100;
 
-const resendApiKey = process.env.RESEND_API_KEY;
-const fromEmail = process.env.NEWSLETTER_FROM_EMAIL;
+let resend: Resend | null = null;
 
-if (!resendApiKey) {
-  throw new Error("Missing RESEND_API_KEY");
+function getResend(): Resend {
+  if (!resend) {
+    const key = process.env.RESEND_API_KEY;
+    if (!key) throw new Error("Missing RESEND_API_KEY");
+    resend = new Resend(key);
+  }
+  return resend;
 }
 
-if (!fromEmail) {
-  throw new Error("Missing NEWSLETTER_FROM_EMAIL");
+function getFromEmail(): string {
+  const email = process.env.NEWSLETTER_FROM_EMAIL;
+  if (!email) throw new Error("Missing NEWSLETTER_FROM_EMAIL");
+  return email;
 }
-
-const resend = new Resend(resendApiKey);
 
 export type DeliveryAttempt = {
   subscriberId: number;
@@ -65,6 +69,9 @@ export async function sendIssueInBatches(params: {
   const cleanBaseUrl = appBaseUrl.replace(/\/$/, "");
   const subscriberChunks = chunk(subscribers, CHUNK_SIZE);
 
+  const fromEmail = getFromEmail();
+  const resendClient = getResend();
+
   for (const subscriberChunk of subscriberChunks) {
     const emailsPayload = subscriberChunk.map((subscriber) => {
       const unsubscribeUrl = `${cleanBaseUrl}/unsubscribe/${subscriber.unsubscribe_token}`;
@@ -77,7 +84,7 @@ export async function sendIssueInBatches(params: {
       };
     });
 
-    const response = await resend.batch.send(emailsPayload);
+    const response = await resendClient.batch.send(emailsPayload);
     const batchError = response.error;
 
     if (batchError) {
