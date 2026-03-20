@@ -1,12 +1,12 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import HeroNewsletterAnimation from "./components/HeroNewsletterAnimation";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
+import { AVAILABLE_CITIES } from "@/src/lib/cities";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const AVAILABLE_CITIES = ["San Francisco", "Los Angeles"] as const;
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -32,7 +32,6 @@ export default function Home() {
       const fallbackCityId = city.toLowerCase().replace(/\s+/g, "-");
       let cityId: string | number = fallbackCityId;
 
-      // Try to resolve a canonical city id first; fall back to slug if lookup is unavailable.
       const cityLookup = await supabase.from("cities").select("id").eq("name", city).maybeSingle();
       if (cityLookup.error) {
         console.warn("city lookup failed, using fallback city_id", cityLookup.error);
@@ -52,7 +51,7 @@ export default function Home() {
         if (isDuplicate) {
           console.warn("signup duplicate", error);
           setSubmitError(false);
-          setSubmitMessage("You’re already subscribed to this city");
+          setSubmitMessage("You're already subscribed to this city.");
           return;
         }
         console.error("signup insert failed", error);
@@ -75,161 +74,175 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#ECEBE9] text-[#1A2A44]">
-      <div className="h-[2px] w-full bg-[#F2B705]" />
+    <div className="flex min-h-screen flex-col bg-[#F8F6F2] text-[#0F1C2E]">
 
-      <header className="border-b border-[#C9CDD4] bg-white">
-        <div className="mx-auto max-w-[1320px] px-6 py-5 text-center md:px-10 md:py-6">
-          <p className="text-4xl font-semibold tracking-tight text-[#1E222C] [font-family:Georgia,'Times_New_Roman',serif] md:text-[1.9rem]">
+      {/* Dark masthead */}
+      <header className="bg-[#0F1C2E]">
+        <div className="mx-auto flex max-w-[1320px] items-center justify-between px-6 py-5 md:px-10">
+          <div className="w-24" />
+          <Link
+            href="/"
+            className="text-[1.9rem] font-normal tracking-tight text-white [font-family:var(--font-serif)]"
+          >
             CitySmart
-          </p>
+          </Link>
+          <div className="flex w-24 justify-end">
+            <Link
+              href="/sample"
+              className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
+            >
+              Sample →
+            </Link>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1240px] px-5 sm:px-6 md:px-20 lg:px-24">
-        <section className="pb-14 pt-12 md:hidden">
-          <div className="mx-auto max-w-[460px]">
-            <h1 className="text-[clamp(2.6rem,9.2vw,3.8rem)] font-semibold leading-[0.98] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
-              <span className="block whitespace-nowrap">From City Hall,</span>
-              <span className="block whitespace-nowrap">to your inbox</span>
+      <main className="mx-auto w-full max-w-[1240px] flex-1 px-5 sm:px-6 md:px-20 lg:px-24">
+        <section className="py-10 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start md:gap-12 md:py-14 lg:gap-16">
+
+          {/* Left column */}
+          <div className="max-w-[480px] md:max-w-none">
+            <h1 className="text-[clamp(2.8rem,6vw,5.2rem)] font-normal leading-[1.0] tracking-tight [font-family:var(--font-serif)]">
+              <span className="block">Your city council,</span>
+              <span className="block">made readable.</span>
             </h1>
 
-            <p className="mt-6 max-w-[360px] text-[1rem] leading-[1.55] text-[#23344F]">
-              CitySmart sends a list of the biggest decisions made by your city counicil to your inbox each week. Stay
-              informed without reading hours of agendas and meeting transcripts.
+            <p className="mt-6 max-w-[440px] text-[1.05rem] leading-[1.65] text-[#4A5568]">
+              We read the meeting minutes so you don't have to. Every Tuesday, get a plain-English briefing on what your city council decided and why it matters.
             </p>
 
-            <form className="mt-7 max-w-[360px]" onSubmit={handleSubmit}>
-              <div className="flex flex-col gap-2 sm:flex-row">
-                <label className="sr-only" htmlFor="email-mobile">
-                  Email
-                </label>
-                <input
-                  id="email-mobile"
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="EMAIL"
-                  required
-                  className="h-14 min-w-0 flex-1 appearance-none border border-[#313745] bg-[#ECEBE9] px-3 text-sm font-semibold tracking-[0.09em] text-[#1A2A44] outline-none placeholder:text-[#858D99] focus:border-[#1A2A44]"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="h-[3.25rem] appearance-none border border-[#1D2430] bg-[#1D2430] px-4 text-[11px] font-semibold tracking-[0.04em] text-[#F2B705] transition hover:bg-[#161D28] sm:whitespace-nowrap"
-                >
-                  {isSubmitting ? "SUBMITTING..." : "GET BRIEFINGS"}
-                </button>
+            {/* Form */}
+            <form className="mt-8 max-w-[540px]" onSubmit={handleSubmit}>
+              {/* Mobile layout */}
+              <div className="flex flex-col gap-3 md:hidden">
+                <div>
+                  <label className="sr-only" htmlFor="city-m">City</label>
+                  <select
+                    id="city-m"
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
+                    className="h-12 w-full border border-[#D1D5DB] bg-white px-3 text-sm text-[#0F1C2E] outline-none focus:border-[#EA580C]"
+                  >
+                    {AVAILABLE_CITIES.map((cityOption) => (
+                      <option key={cityOption}>{cityOption}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex h-14">
+                  <label className="sr-only" htmlFor="email-m">Email</label>
+                  <input
+                    id="email-m"
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="YOUR EMAIL"
+                    required
+                    className="h-full flex-1 border border-r-0 border-[#D1D5DB] bg-white px-4 text-sm font-medium tracking-[0.04em] text-[#0F1C2E] outline-none placeholder:text-[#8A95A3] focus:border-[#EA580C]"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="h-full shrink-0 bg-[#EA580C] px-5 text-sm font-semibold text-white transition hover:bg-[#C2410C]"
+                  >
+                    →
+                  </button>
+                </div>
               </div>
 
-              <div className="mt-2">
-                <label className="sr-only" htmlFor="city-mobile">
-                  City
-                </label>
+              {/* Desktop layout — joined 3-column */}
+              <div className="hidden md:flex h-14 shadow-sm">
+                <label className="sr-only" htmlFor="city-d">City</label>
                 <select
-                  id="city-mobile"
+                  id="city-d"
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
-                  className="h-[3.25rem] w-full appearance-none border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
+                  className="h-full w-[148px] shrink-0 border border-r-0 border-[#D1D5DB] bg-white px-3 text-sm text-[#0F1C2E] outline-none focus:border-[#EA580C] focus:z-10"
                 >
                   {AVAILABLE_CITIES.map((cityOption) => (
                     <option key={cityOption}>{cityOption}</option>
                   ))}
                 </select>
-              </div>
-            </form>
-            {submitMessage ? (
-              <p className={`mt-3 max-w-[360px] text-sm ${submitError ? "text-[#B42318]" : "text-[#16794C]"}`}>
-                {submitMessage}
-              </p>
-            ) : null}
-
-            <div className="mt-8 max-w-[360px] border-t border-[#BCC2CD] pt-5">
-              <Link
-                href="/sample"
-                className="inline-flex items-center gap-3 text-xl font-medium tracking-tight text-[#1A2A44] transition hover:text-[#0B2545]"
-              >
-                <span>See last week’s briefing</span>
-                <span className="text-[#F2B705]">→</span>
-              </Link>
-            </div>
-
-          </div>
-        </section>
-
-        <section className="hidden md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-16 lg:gap-20 md:pb-20 md:pt-16">
-          <div className="max-w-[600px]">
-            <h1 className="max-w-[580px] text-[clamp(3.75rem,5vw,5.35rem)] font-semibold leading-[0.97] tracking-tight [font-family:Georgia,'Times_New_Roman',serif]">
-              <span className="block whitespace-nowrap">From City Hall,</span>
-              <span className="block whitespace-nowrap">to your inbox</span>
-            </h1>
-
-            <p className="mt-7 max-w-[480px] text-[1.06rem] leading-[1.55] text-[#23344F]">
-              CitySmart sends a list of the biggest decisions made by your city counicil to your inbox each week. Stay
-              informed without reading hours of agendas and meeting transcripts.
-            </p>
-
-            <form className="mt-7 max-w-[500px]" onSubmit={handleSubmit}>
-              <div className="flex items-stretch gap-3">
-                <label className="sr-only" htmlFor="email-desktop">
-                  Email
-                </label>
+                <label className="sr-only" htmlFor="email-d">Email</label>
                 <input
-                  id="email-desktop"
+                  id="email-d"
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="EMAIL"
+                  placeholder="YOUR EMAIL"
                   required
-                  className="h-14 flex-1 border border-[#313745] bg-[#ECEBE9] px-4 text-sm font-semibold tracking-[0.1em] text-[#1A2A44] outline-none placeholder:text-[#858D99] focus:border-[#1A2A44]"
+                  className="h-full flex-1 border border-r-0 border-[#D1D5DB] bg-white px-4 text-sm font-medium tracking-[0.04em] text-[#0F1C2E] outline-none placeholder:text-[#8A95A3] focus:border-[#EA580C] focus:z-10"
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-14 border border-[#1D2430] bg-[#1D2430] px-8 text-sm font-semibold tracking-[0.06em] text-[#F2B705] transition hover:bg-[#161D28] whitespace-nowrap"
+                  className="h-full shrink-0 bg-[#EA580C] px-8 text-sm font-semibold text-white transition hover:bg-[#C2410C] whitespace-nowrap"
                 >
-                  {isSubmitting ? "SUBMITTING..." : "GET BRIEFINGS"}
+                  {isSubmitting ? "..." : "Subscribe →"}
                 </button>
               </div>
-
-              <div className="mt-3">
-                <label className="sr-only" htmlFor="city-desktop">
-                  City
-                </label>
-                <select
-                  id="city-desktop"
-                  value={city}
-                  onChange={(event) => setCity(event.target.value)}
-                  className="h-11 w-full border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
-                >
-                  {AVAILABLE_CITIES.map((cityOption) => (
-                    <option key={cityOption}>{cityOption}</option>
-                  ))}
-                </select>
-              </div>
             </form>
+
             {submitMessage ? (
-              <p className={`mt-3 max-w-[500px] text-sm ${submitError ? "text-[#B42318]" : "text-[#16794C]"}`}>
+              <p className={`mt-3 max-w-[540px] text-sm ${submitError ? "text-red-600" : "text-green-700"}`}>
                 {submitMessage}
               </p>
             ) : null}
 
-            <div className="mt-7 max-w-[500px] border-t border-[#BCC2CD] pt-6">
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#8A95A3]">
+              <span>Free</span>
+              <span className="text-[#D1D5DB]">·</span>
+              <span>Every Tuesday</span>
+              <span className="text-[#D1D5DB]">·</span>
+              <span>Unsubscribe anytime</span>
+            </div>
+
+            <div className="mt-8 max-w-[540px] border-t border-[#E2E5EA] pt-6">
               <Link
                 href="/sample"
-                className="inline-flex items-center gap-3 text-[1.4rem] font-medium tracking-tight text-[#1A2A44] transition hover:text-[#0B2545] md:text-[1.65rem]"
+                className="inline-flex items-center gap-3 text-[1.3rem] font-normal tracking-tight text-[#0F1C2E] transition hover:text-[#EA580C] [font-family:var(--font-serif)] md:text-[1.45rem]"
               >
-                <span>Read last week’s newsletter</span>
-                <span className="text-[#F2B705]">→</span>
+                <span>Read last week&apos;s newsletter</span>
+                <span className="text-[#EA580C]">→</span>
               </Link>
             </div>
           </div>
 
-          <div className="flex justify-start">
-            <HeroNewsletterAnimation className="md:-mt-[132px] md:ml-2" />
+          {/* Right column — desktop only */}
+          <div className="hidden md:block md:-mr-16 lg:-mr-24 md:-ml-12">
+            <Image
+              src="/hero-v3.png"
+              alt="Person walking through San Francisco reading CitySmart on their phone"
+              width={900}
+              height={506}
+              className="w-full"
+              style={{
+                maskImage: "radial-gradient(ellipse 88% 88% at 50% 25%, black 45%, transparent 100%)",
+                WebkitMaskImage: "radial-gradient(ellipse 88% 88% at 50% 25%, black 45%, transparent 100%)",
+              }}
+              priority
+            />
           </div>
+
         </section>
       </main>
+
+      <footer className="border-t border-[#E2E5EA] bg-white">
+        <div className="mx-auto max-w-[1320px] px-6 py-8 md:px-10">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="font-normal text-[#0F1C2E] [font-family:var(--font-serif)]">CitySmart</p>
+              <p className="mt-0.5 text-sm text-[#8A95A3]">Local government, made readable.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#8A95A3]">
+              <Link href="/sample" className="transition hover:text-[#0F1C2E]">
+                Sample issue
+              </Link>
+              <span className="text-[#D1D5DB]">·</span>
+              <span>© 2026 CitySmart</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
