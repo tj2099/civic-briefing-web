@@ -6,6 +6,7 @@ import HeroNewsletterAnimation from "./components/HeroNewsletterAnimation";
 import { supabase } from "@/lib/supabase";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const AVAILABLE_CITIES = ["San Francisco", "Los Angeles"] as const;
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -131,12 +132,9 @@ export default function Home() {
                   onChange={(event) => setCity(event.target.value)}
                   className="h-[3.25rem] w-full appearance-none border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
                 >
-                  <option>San Francisco</option>
-                  <option>Seattle</option>
-                  <option>Los Angeles</option>
-                  <option>New York</option>
-                  <option>Chicago</option>
-                  <option>Washington DC</option>
+                  {AVAILABLE_CITIES.map((cityOption) => (
+                    <option key={cityOption}>{cityOption}</option>
+                  ))}
                 </select>
               </div>
             </form>
@@ -204,12 +202,9 @@ export default function Home() {
                   onChange={(event) => setCity(event.target.value)}
                   className="h-11 w-full border border-[#C2C8D2] bg-[#ECEBE9] px-3 text-sm text-[#1A2A44] outline-none focus:border-[#1A2A44]"
                 >
-                  <option>San Francisco</option>
-                  <option>Seattle</option>
-                  <option>Los Angeles</option>
-                  <option>New York</option>
-                  <option>Chicago</option>
-                  <option>Washington DC</option>
+                  {AVAILABLE_CITIES.map((cityOption) => (
+                    <option key={cityOption}>{cityOption}</option>
+                  ))}
                 </select>
               </div>
             </form>
