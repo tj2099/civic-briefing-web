@@ -51,8 +51,16 @@ function chunk<T>(items: T[], size: number): T[][] {
   return chunks;
 }
 
+const UNSUBSCRIBE_PLACEHOLDER = "%%UNSUBSCRIBE_URL%%";
+
 function buildHtml(issueHtml: string, unsubscribeUrl: string) {
-  return `${issueHtml}<p style="margin-top:24px;font-size:12px;color:#666;">Unsubscribe: <a href="${unsubscribeUrl}">${unsubscribeUrl}</a></p>`;
+  if (issueHtml.includes(UNSUBSCRIBE_PLACEHOLDER)) {
+    return issueHtml.replaceAll(UNSUBSCRIBE_PLACEHOLDER, unsubscribeUrl);
+  }
+  // Fallback for HTML that predates the placeholder
+  return `${issueHtml}<p style="margin-top:24px;font-size:12px;color:#666;text-align:center;">
+    <a href="${unsubscribeUrl}" style="color:#888;">Unsubscribe</a>
+  </p>`;
 }
 
 function buildText(issueText: string, unsubscribeUrl: string) {
