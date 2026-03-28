@@ -208,7 +208,7 @@ export default function Home() {
           {/* Right column — desktop only */}
           <div className="hidden md:block md:-mr-16 lg:-mr-24 md:-ml-12">
             <Image
-              src="/hero-sf-4.png"
+              src="/hero-sf-5.jpg"
               alt="Person walking through San Francisco reading CitySmart on their phone"
               width={1376}
               height={768}
