@@ -149,13 +149,13 @@ export default function Home() {
               </div>
 
               {/* Desktop layout — joined 3-column */}
-              <div className="hidden md:flex h-14 shadow-sm">
+              <div className="hidden md:flex h-[3.75rem] gap-2 shadow-sm">
                 <label className="sr-only" htmlFor="city-d">City</label>
                 <select
                   id="city-d"
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
-                  className="h-full w-[148px] shrink-0 border border-r-0 border-[#D1D5DB] bg-white px-3 text-sm text-[#0F1C2E] outline-none focus:border-[#EA580C] focus:z-10"
+                  className="h-full w-[160px] shrink-0 border border-[#D1D5DB] bg-white px-4 text-sm text-[#0F1C2E] outline-none focus:border-[#EA580C]"
                 >
                   <option>San Francisco</option>
                   <option disabled>Coming soon...</option>
@@ -168,7 +168,7 @@ export default function Home() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="YOUR EMAIL"
                   required
-                  className="h-full flex-1 border border-r-0 border-[#D1D5DB] bg-white px-4 text-sm font-medium tracking-[0.04em] text-[#0F1C2E] outline-none placeholder:text-[#8A95A3] focus:border-[#EA580C] focus:z-10"
+                  className="h-full flex-1 border border-[#D1D5DB] bg-white px-4 text-sm font-medium tracking-[0.04em] text-[#0F1C2E] outline-none placeholder:text-[#8A95A3] focus:border-[#EA580C]"
                 />
                 <button
                   type="submit"
