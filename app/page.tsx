@@ -86,12 +86,12 @@ export default function Home() {
           >
             CitySmart
           </Link>
-          <div className="flex w-24 justify-end">
+          <div className="flex justify-end">
             <Link
               href="/sample"
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
             >
-              Last week&apos;s newsletter →
+              <span className="whitespace-nowrap">Last week&apos;s newsletter →</span>
             </Link>
           </div>
         </div>
