@@ -103,7 +103,7 @@ export default function Home() {
           {/* Left column */}
           <div className="max-w-[480px] md:max-w-none">
             <h1 className="text-[clamp(2.8rem,6vw,5.2rem)] font-normal leading-[1.0] tracking-tight [font-family:var(--font-serif)]">
-              <span className="block">City government,</span>
+              <span className="block">Your city council,</span>
               <span className="block">made readable.</span>
             </h1>
 
