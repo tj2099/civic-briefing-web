@@ -197,7 +197,7 @@ export default function SamplePage() {
                       <h2 className="text-5xl font-normal leading-[1.05] tracking-tight text-[#0F1C2E] [font-family:var(--font-serif)] md:text-6xl">
                         CitySmart Weekly
                       </h2>
-                      <p className="mt-2 text-sm text-[#8A95A3] md:text-[16px]">Friday, March 06, 2026</p>
+                      <p className="mt-2 text-sm text-[#8A95A3] md:text-[16px]">March 27, 2026</p>
                     </div>
                   </div>
                 </header>
@@ -208,11 +208,9 @@ export default function SamplePage() {
                     <SectionLabel label="What happened this week?" icon={BoltIcon} />
                     <div className="mt-4 rounded-[14px] border border-[#E2E5EA] bg-[#FAFAF8] p-4">
                       <p className="text-sm leading-relaxed text-[#4A5568]">
-                        The Board approved major funding and policy moves spanning affordable housing on Treasure
-                        Island, Port safety work, and large parking-management contracts tied to waterfront facilities.
-                        Several citywide regulatory changes, including a full Fire Code update and streamlined Shared
-                        Spaces rules, advanced on first reading and will return for final votes. The Board also backed
-                        restoring outdoor tsunami warning infrastructure, passing the measure on a 10-1 vote.
+                        Supervisors prioritized housing conversion, corridor safety staffing, and continuity funding
+                        for shelter operations. Several fiscal and infrastructure items passed with broad support,
+                        while a smaller set of policy votes moved to final reads next week.
                       </p>
                     </div>
                   </section>
@@ -223,15 +221,15 @@ export default function SamplePage() {
                       <article className="rounded-xl border border-[#E2E5EA] bg-[#FAFAF8] p-4">
                         <div className="flex items-start justify-between gap-3">
                           <h4 className="text-sm font-semibold leading-snug text-[#0F1C2E]">
-                            Treasure Island affordable housing and transit grant package
+                            Treasure Island affordable housing and transit grant approved
                           </h4>
                           <span className="shrink-0 rounded-full bg-[#FFF7ED] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.06em] text-[#EA580C]">
                             Passed
                           </span>
                         </div>
                         <p className="mt-2 text-sm leading-relaxed text-[#4A5568]">
-                          Supervisors approved financing and grant alignment to accelerate affordable units and improve
-                          transit access to the island.
+                          Supervisors approved funding to accelerate affordable housing delivery and transit
+                          connectivity upgrades on Treasure Island. Passed 10-1 with implementation updates due in April.
                         </p>
                         <div className="mt-3 overflow-hidden rounded-lg border border-[#E2E5EA] bg-white">
                           <svg
@@ -272,20 +270,20 @@ export default function SamplePage() {
                       </article>
                       <article className="rounded-xl border border-[#E2E5EA] bg-white p-4">
                         <h4 className="text-sm font-semibold leading-snug text-[#0F1C2E]">
-                          Port safety updates and dry dock removal planning
+                          Port funded $18.5 million for dry dock removal
                         </h4>
                         <p className="mt-2 text-sm leading-relaxed text-[#4A5568]">
-                          A safety-focused package advanced with procurement guidance for dry dock removal and hazard
-                          mitigation timelines.
+                          The Board approved $18.5M for the Port to stabilize and dispose of dry docks and make
+                          shipyard safety and infrastructure improvements.
                         </p>
                       </article>
                       <article className="rounded-xl border border-[#E2E5EA] bg-white p-4">
                         <h4 className="text-sm font-semibold leading-snug text-[#0F1C2E]">
-                          SFMTA parking management contracts near waterfront facilities
+                          Shelter operations contract receives bridge funding
                         </h4>
                         <p className="mt-2 text-sm leading-relaxed text-[#4A5568]">
-                          Contract authorizations moved forward with additional oversight language on performance and
-                          enforcement metrics.
+                          Members approved short-term funding to avoid a service gap while a longer procurement
+                          process continues. Adopted unanimously.
                         </p>
                       </article>
                     </div>
@@ -294,33 +292,21 @@ export default function SamplePage() {
                   <section id="more-actions" className={newsletterSectionClass("more-actions")}>
                     <SectionLabel label="More actions" icon={FolderIcon} />
                     <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#4A5568]">
-                      <li>Shared Spaces streamlining legislation advanced to next reading with technical amendments.</li>
-                      <li>Controller reporting cadence was tightened for major infrastructure expenditures.</li>
-                      <li>Budget and Finance scheduled follow-up hearings on implementation deadlines.</li>
+                      <li>Public works paving allocation rebalanced by district, directing funding toward corridors with higher collision and pavement complaints. Passed with one abstention.</li>
+                      <li>Small business fee relief ordinance advanced, extending temporary permit fee relief for targeted categories through the next fiscal period. Approved on first read.</li>
+                      <li>Storm response procurement framework adopted, establishing pre-qualified vendor rules to speed cleanup and emergency repairs. Adopted unanimously.</li>
                     </ul>
                   </section>
 
                   <section id="watchlist" className={newsletterSectionClass("watchlist")}>
                     <SectionLabel label="Watchlist" icon={EyeIcon} />
-                    <div className="mt-4 space-y-4 text-sm leading-relaxed text-[#4A5568]">
-                      <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0F1C2E]">
-                          Public safety and emergency response
-                        </p>
-                        <ul className="mt-1 space-y-1">
-                          <li>Final vote timing for Fire Code updates and related enforcement rules.</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0F1C2E]">
-                          Housing and infrastructure delivery
-                        </p>
-                        <ul className="mt-1 space-y-1">
-                          <li>Port implementation milestones and contractor selection transparency.</li>
-                          <li>Treasury and grant disbursement pacing for Treasure Island housing delivery.</li>
-                        </ul>
-                      </div>
-                    </div>
+                    <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#4A5568]">
+                      <li>Police overtime controls return with revised reporting language.</li>
+                      <li>Second hearing expected on downtown vacancy tax implementation.</li>
+                      <li>School-zone speed camera expansion item continued for one week.</li>
+                      <li>Labor standards package remains pending committee recommendation.</li>
+                      <li>Utility undergrounding timeline update expected later this month.</li>
+                    </ul>
                   </section>
 
                 </div>
