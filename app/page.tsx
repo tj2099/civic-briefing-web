@@ -91,7 +91,7 @@ export default function Home() {
               href="/sample"
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
             >
-              Sample →
+              Last week&apos;s newsletter →
             </Link>
           </div>
         </div>
