@@ -215,8 +215,10 @@ export default function Home() {
               className="w-full"
               style={{
                 mixBlendMode: "multiply",
-                maskImage: "radial-gradient(ellipse 70% 65% at 56% 40%, black 20%, transparent 75%)",
-                WebkitMaskImage: "radial-gradient(ellipse 70% 65% at 56% 40%, black 20%, transparent 75%)",
+                maskImage: "linear-gradient(to right, transparent 0%, black 14%, black 80%, transparent 100%), linear-gradient(to bottom, black 72%, transparent 100%), linear-gradient(to top, black 93%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 14%, black 80%, transparent 100%), linear-gradient(to bottom, black 72%, transparent 100%), linear-gradient(to top, black 93%, transparent 100%)",
+                maskComposite: "intersect",
+                WebkitMaskComposite: "source-in, source-in",
               }}
               priority
             />
