@@ -103,12 +103,12 @@ export default function Home() {
           {/* Left column */}
           <div className="max-w-[480px] md:max-w-none">
             <h1 className="text-[clamp(2.8rem,6vw,5.2rem)] font-normal leading-[1.0] tracking-tight [font-family:var(--font-serif)]">
-              <span className="block">Your city council,</span>
+              <span className="block">City government,</span>
               <span className="block">made readable.</span>
             </h1>
 
             <p className="mt-6 max-w-[440px] text-[1.05rem] leading-[1.65] text-[#4A5568]">
-              We read the meeting minutes so you don't have to. Every Tuesday, get a plain-English briefing on what your city council decided and why it matters.
+              We read city council and board of supervisors meeting minutes so you don&apos;t have to. Every Tuesday, get briefed on what your city government decided and why it matters.
             </p>
 
             {/* Form */}
@@ -123,9 +123,8 @@ export default function Home() {
                     onChange={(event) => setCity(event.target.value)}
                     className="h-12 w-full border border-[#D1D5DB] bg-white px-3 text-sm text-[#0F1C2E] outline-none focus:border-[#EA580C]"
                   >
-                    {AVAILABLE_CITIES.map((cityOption) => (
-                      <option key={cityOption}>{cityOption}</option>
-                    ))}
+                    <option>San Francisco</option>
+                    <option disabled>Coming soon...</option>
                   </select>
                 </div>
                 <div className="flex h-14">
@@ -158,9 +157,8 @@ export default function Home() {
                   onChange={(event) => setCity(event.target.value)}
                   className="h-full w-[148px] shrink-0 border border-r-0 border-[#D1D5DB] bg-white px-3 text-sm text-[#0F1C2E] outline-none focus:border-[#EA580C] focus:z-10"
                 >
-                  {AVAILABLE_CITIES.map((cityOption) => (
-                    <option key={cityOption}>{cityOption}</option>
-                  ))}
+                  <option>San Francisco</option>
+                  <option disabled>Coming soon...</option>
                 </select>
                 <label className="sr-only" htmlFor="email-d">Email</label>
                 <input
@@ -231,7 +229,7 @@ export default function Home() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="font-normal text-[#0F1C2E] [font-family:var(--font-serif)]">CitySmart</p>
-              <p className="mt-0.5 text-sm text-[#8A95A3]">Local government, made readable.</p>
+              <p className="mt-0.5 text-sm text-[#8A95A3]">City government, made readable.</p>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#8A95A3]">
               <Link href="/sample" className="transition hover:text-[#0F1C2E]">
