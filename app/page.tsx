@@ -91,7 +91,8 @@ export default function Home() {
               href="/sample"
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
             >
-              <span className="whitespace-nowrap">Last week&apos;s newsletter →</span>
+              <span className="md:hidden">Sample →</span>
+              <span className="hidden md:inline whitespace-nowrap">Last week&apos;s newsletter →</span>
             </Link>
           </div>
         </div>
