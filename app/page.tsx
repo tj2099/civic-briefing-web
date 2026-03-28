@@ -208,10 +208,10 @@ export default function Home() {
           {/* Right column — desktop only */}
           <div className="hidden md:block md:-mr-16 lg:-mr-24 md:-ml-12">
             <Image
-              src="/hero-sf-2.jpg"
+              src="/hero-sf-3.png"
               alt="Person walking through San Francisco reading CitySmart on their phone"
-              width={1024}
-              height={572}
+              width={1376}
+              height={768}
               className="w-full"
               style={{
                 maskImage: "radial-gradient(ellipse 88% 88% at 50% 25%, black 45%, transparent 100%)",
