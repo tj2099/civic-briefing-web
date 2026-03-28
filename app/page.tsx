@@ -78,15 +78,14 @@ export default function Home() {
 
       {/* Dark masthead */}
       <header className="bg-[#0F1C2E]">
-        <div className="mx-auto flex max-w-[1320px] items-center justify-between px-6 py-5 md:px-10">
-          <div className="w-24" />
+        <div className="relative mx-auto flex max-w-[1320px] items-center justify-center px-6 py-5 md:px-10">
           <Link
             href="/"
             className="text-[1.9rem] font-normal tracking-tight text-white [font-family:var(--font-serif)]"
           >
             CitySmart
           </Link>
-          <div className="flex justify-end">
+          <div className="absolute right-6 md:right-10">
             <Link
               href="/sample"
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
