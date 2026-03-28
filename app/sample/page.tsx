@@ -1,6 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
 
 export default function SamplePage() {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  function handleLoad() {
+    const iframe = iframeRef.current;
+    if (iframe?.contentDocument?.body) {
+      iframe.style.height = iframe.contentDocument.body.scrollHeight + "px";
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-[#F8F6F2] text-[#0F1C2E]">
 
@@ -37,14 +49,16 @@ export default function SamplePage() {
           </p>
         </div>
 
-        {/* Newsletter iframe */}
+        {/* Newsletter iframe — auto-sized to full content height */}
         <div className="mt-10 overflow-hidden rounded-2xl border border-[#E2E5EA] shadow-xl shadow-[#0F1C2E]/8">
           <iframe
+            ref={iframeRef}
             src="/newsletter-sample.html"
             title="CitySmart sample newsletter"
+            onLoad={handleLoad}
+            scrolling="no"
             className="block w-full"
-            style={{ height: "80vh", minHeight: 600, border: "none" }}
-            scrolling="yes"
+            style={{ border: "none", minHeight: 600 }}
           />
         </div>
       </main>
