@@ -85,6 +85,14 @@ export default function Home() {
           >
             CitySmart
           </Link>
+          <div className="absolute left-6 md:left-10">
+            <Link
+              href="/about"
+              className="hidden md:inline text-sm font-medium text-white/70 transition hover:text-white"
+            >
+              About
+            </Link>
+          </div>
           <div className="absolute right-6 md:right-10">
             <Link
               href="/sample"
