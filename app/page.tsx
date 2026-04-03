@@ -107,7 +107,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-[440px] text-[1.05rem] leading-[1.65] text-[#4A5568]">
-              We read city council and board of supervisors meeting minutes so you don&apos;t have to. Every Tuesday, get briefed on what your city government decided and why it matters.
+              We read city council and board of supervisors meeting minutes so you don&apos;t have to. Every Wednesday, get briefed on what your city government decided and why it matters.
             </p>
 
             {/* Form */}
@@ -188,7 +188,7 @@ export default function Home() {
             <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#8A95A3]">
               <span>Free</span>
               <span className="text-[#D1D5DB]">·</span>
-              <span>Every Tuesday</span>
+              <span>Every Wednesday</span>
               <span className="text-[#D1D5DB]">·</span>
               <span>Unsubscribe anytime</span>
             </div>
