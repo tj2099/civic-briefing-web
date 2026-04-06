@@ -88,7 +88,7 @@ export default function Home() {
           <div className="absolute left-6 md:left-10">
             <Link
               href="/about"
-              className="hidden md:inline text-sm font-medium text-white/70 transition hover:text-white"
+              className="text-sm font-medium text-white/70 transition hover:text-white"
             >
               About
             </Link>
@@ -98,6 +98,7 @@ export default function Home() {
               href="/sample"
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
             >
+              <span className="md:hidden">Sample →</span>
               <span className="hidden md:inline whitespace-nowrap">Last week&apos;s newsletter →</span>
             </Link>
           </div>

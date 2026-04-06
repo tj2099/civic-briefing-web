@@ -23,10 +23,11 @@ export default function AboutPage() {
           </Link>
           <div className="absolute left-6 md:left-10">
             <Link
-              href="/about"
-              className="hidden md:inline text-sm font-medium text-white/70 transition hover:text-white"
+              href="/"
+              className="text-sm font-medium text-white/70 transition hover:text-white"
             >
-              About
+              <span className="md:hidden">← Home</span>
+              <span className="hidden md:inline">About</span>
             </Link>
           </div>
           <div className="absolute right-6 md:right-10">
@@ -34,6 +35,7 @@ export default function AboutPage() {
               href="/sample"
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
             >
+              <span className="md:hidden">Sample →</span>
               <span className="hidden md:inline whitespace-nowrap">Last week&apos;s newsletter →</span>
             </Link>
           </div>
@@ -85,7 +87,7 @@ export default function AboutPage() {
           </div>
 
           {/* Right — portrait */}
-          <div className="hidden md:block">
+          <div className="mt-8 md:mt-0 md:block">
             <div className="overflow-hidden rounded-[4px] shadow-[0_8px_32px_rgba(15,28,46,0.12)]">
               <Image
                 src="/about-portrait-v2.png"
