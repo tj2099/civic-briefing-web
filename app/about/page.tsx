@@ -47,10 +47,27 @@ export default function AboutPage() {
 
           {/* Left — text */}
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.12em] text-[#EA580C]">About</p>
-            <h1 className="mt-3 text-[clamp(2.4rem,4vw,4rem)] font-normal leading-[1.05] tracking-tight [font-family:var(--font-serif)]">
+            <p className="hidden md:block text-xs font-medium uppercase tracking-[0.12em] text-[#EA580C]">About</p>
+            <h1 className="hidden md:block mt-3 text-[clamp(2.4rem,4vw,4rem)] font-normal leading-[1.05] tracking-tight [font-family:var(--font-serif)]">
               Who is CitySmart?
             </h1>
+
+            {/* Author byline — mobile only */}
+            <div className="flex items-center gap-4 mb-5 md:hidden">
+              <div className="shrink-0 rounded-full overflow-hidden ring-[2.5px] ring-[#EA580C]" style={{width: 72, height: 72}}>
+                <Image
+                  src="/about-headshot.png"
+                  alt="Tommy, founder of CitySmart"
+                  width={72}
+                  height={72}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-[15px] font-semibold text-[#0F1C2E]">Tommy</p>
+                <p className="text-xs text-[#8A95A3]">Founder &amp; SF politics nerd</p>
+              </div>
+            </div>
 
             <div className="mt-5 space-y-4 text-[1.05rem] leading-[1.7] text-[#4A5568]">
               <p>
@@ -86,8 +103,8 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Right — portrait */}
-          <div className="mt-8 md:mt-0 md:block">
+          {/* Right — portrait, desktop only */}
+          <div className="hidden md:block">
             <div className="overflow-hidden rounded-[4px] shadow-[0_8px_32px_rgba(15,28,46,0.12)]">
               <Image
                 src="/about-portrait-v2.png"
