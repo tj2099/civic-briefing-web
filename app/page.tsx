@@ -116,7 +116,18 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-[440px] text-[1.05rem] leading-[1.65] text-[#4A5568]">
-              We read city council and board of supervisors meeting minutes so you don&apos;t have to. Every Wednesday, get briefed on what your city government decided and why it matters.
+              CitySmart sends a{" "}
+              <span
+                style={{
+                  textDecoration: "underline",
+                  textDecorationColor: "#EA580C",
+                  textDecorationThickness: "2px",
+                  textUnderlineOffset: "3px",
+                }}
+              >
+                weekly briefing
+              </span>{" "}
+              to your inbox every Wednesday covering what your city council or board of supervisors actually decided — and why it matters. Join your neighbors and see what your government is up to.
             </p>
 
             {/* Form */}

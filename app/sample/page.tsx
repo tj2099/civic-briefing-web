@@ -62,7 +62,7 @@ export default function SamplePage() {
             scrolling="no"
             className="block w-full"
             style={{ border: "none", minHeight: 600 }}
-            sandbox="allow-same-origin allow-popups allow-top-navigation"
+            sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
           />
         </div>
 
