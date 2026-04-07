@@ -40,8 +40,9 @@ export default function SamplePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8A95A3]">
             Sample issue
           </p>
-          <h1 className="mt-3 text-4xl font-normal tracking-tight [font-family:var(--font-serif)] md:text-5xl">
-            This is what CitySmart looks like
+          <h1 className="mt-3 font-normal tracking-tight [font-family:var(--font-serif)] text-[2rem] md:text-5xl">
+            <span className="md:hidden whitespace-nowrap">What CitySmart looks like</span>
+            <span className="hidden md:inline">This is what CitySmart looks like</span>
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-[#4A5568] md:hidden">
             Every week you get briefed on what your city council actually did — no jargon, no agenda, just decisions that affect you.
