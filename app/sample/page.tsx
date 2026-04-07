@@ -35,16 +35,16 @@ export default function SamplePage() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10 md:py-14">
+      <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-6 md:py-14">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8A95A3]">
             Sample issue
           </p>
-          <h1 className="mt-3 text-4xl font-normal tracking-tight [font-family:var(--font-serif)] md:text-5xl">
+          <h1 className="mt-2 text-4xl font-normal tracking-tight [font-family:var(--font-serif)] md:mt-3 md:text-5xl">
             <span className="md:hidden">This is CitySmart</span>
             <span className="hidden md:inline">This is what CitySmart looks like</span>
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-[#4A5568] md:hidden">
+          <p className="mt-2 text-lg leading-relaxed text-[#4A5568] md:hidden md:mt-4">
             Every week you get briefed on what your city council actually did — no jargon, no agenda, just decisions that affect you.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-[#4A5568] hidden md:block">
@@ -53,7 +53,7 @@ export default function SamplePage() {
         </div>
 
         {/* Newsletter iframe — auto-sized to full content height */}
-        <div className="mt-10 overflow-hidden rounded-2xl border border-[#E2E5EA] shadow-xl shadow-[#0F1C2E]/8">
+        <div className="mt-5 md:mt-10 overflow-hidden rounded-2xl border border-[#E2E5EA] shadow-xl shadow-[#0F1C2E]/8">
           <iframe
             ref={iframeRef}
             src="/newsletter-sample.html"
@@ -62,7 +62,18 @@ export default function SamplePage() {
             scrolling="no"
             className="block w-full"
             style={{ border: "none", minHeight: 600 }}
+            sandbox="allow-same-origin allow-popups allow-top-navigation"
           />
+        </div>
+
+        {/* Mobile subscribe CTA */}
+        <div className="mt-8 md:hidden">
+          <Link
+            href="/"
+            className="block w-full bg-[#EA580C] py-3 text-center text-sm font-semibold text-white transition hover:bg-[#C2410C]"
+          >
+            Subscribe free →
+          </Link>
         </div>
       </main>
 
