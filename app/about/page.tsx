@@ -64,18 +64,17 @@ export default function AboutPage() {
                 />
               </div>
               <div>
-                <p className="text-[15px] font-semibold text-[#0F1C2E]">Tommy</p>
+                <p className="text-[clamp(2.4rem,4vw,4rem)] font-normal leading-none tracking-tight text-[#0F1C2E] [font-family:var(--font-serif)]">Tommy</p>
                 <p className="text-xs text-[#8A95A3]">Founder &amp; SF politics nerd</p>
               </div>
             </div>
 
             <div className="mt-5 space-y-4 text-[1.05rem] leading-[1.7] text-[#4A5568]">
               <p>
-                Hi, I&apos;m Tommy, the creator of CitySmart and a San Francisco
-                politics nerd. I started CitySmart because I was curious about
-                what the Board of Supervisors actually does every week and
-                didn&apos;t have time to read the meeting minutes and committee
-                transcripts to find out.
+                Hi, I&apos;m Tommy, the creator of CitySmart. I started CitySmart
+                because I was curious about what the Board of Supervisors
+                actually does every week and didn&apos;t have time to read the
+                meeting minutes and committee transcripts to find out.
               </p>
               <p>
                 Every Wednesday, CitySmart does that for you. You&apos;ll learn
