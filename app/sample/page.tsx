@@ -44,8 +44,7 @@ export default function SamplePage() {
             This is what CitySmart looks like
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-[#4A5568]">
-            Every week you get a clean, readable briefing on what your city council actually did —
-            no jargon, no agenda, just the decisions that affect your city.
+            Every week you get a readable briefing on what your city council actually did — no jargon, no agenda, just decisions that affect your city.
           </p>
         </div>
 
