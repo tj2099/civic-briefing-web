@@ -72,9 +72,9 @@ export default function AboutPage() {
             <div className="mt-5 space-y-4 text-[1.05rem] leading-[1.7] text-[#4A5568]">
               <p>
                 Hi, I&apos;m Tommy, the creator of CitySmart. I started CitySmart
-                because I was curious about what the Board of Supervisors
-                actually does every week and didn&apos;t have time to read the
-                meeting minutes and committee transcripts to find out.
+                because I was curious about what the San Francisco Board of
+                Supervisors actually does every week and didn&apos;t have time to
+                read the meeting minutes and committee transcripts to find out.
               </p>
               <p>
                 Every Wednesday, CitySmart does that for you. You&apos;ll learn
