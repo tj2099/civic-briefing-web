@@ -127,7 +127,7 @@ export default function Home() {
               >
                 weekly briefing
               </span>{" "}
-              to your inbox every Wednesday covering what your city council or board of supervisors actually decided — and why it matters. Join your neighbors and see what your government is up to.
+              to your inbox every Wednesday covering what your city council or board of supervisors decided — and why it matters. Join your neighbors and see what your government is up to.
             </p>
 
             {/* Form */}
