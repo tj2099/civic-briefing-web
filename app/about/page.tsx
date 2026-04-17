@@ -77,7 +77,7 @@ export default function AboutPage() {
                 read the meeting minutes and committee transcripts to find out.
               </p>
               <p>
-                Every Wednesday, CitySmart does that for you. You&apos;ll learn
+                Every Friday, CitySmart does that for you. You&apos;ll learn
                 about all sorts of interesting things, from how much the City
                 spends on dry dock renovations to what goes into creating an
                 entertainment district. It&apos;s free, independent, and built on

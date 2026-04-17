@@ -127,7 +127,7 @@ export default function Home() {
               >
                 weekly briefing
               </span>{" "}
-              to your inbox every Wednesday covering what your city council or board of supervisors decided — and why it matters. Join your neighbors and see what your government is up to.
+              to your inbox every Friday covering what your city council or board of supervisors decided — and why it matters. Join your neighbors and see what your government is up to.
             </p>
 
             {/* Form */}
@@ -208,7 +208,7 @@ export default function Home() {
             <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#8A95A3]">
               <span>Free</span>
               <span className="text-[#D1D5DB]">·</span>
-              <span>Every Wednesday</span>
+              <span>Every Friday</span>
               <span className="text-[#D1D5DB]">·</span>
               <span>Unsubscribe anytime</span>
             </div>
