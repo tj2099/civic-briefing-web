@@ -258,6 +258,15 @@ export default function Home() {
                 Sample issue
               </Link>
               <span className="text-[#D1D5DB]">·</span>
+              <a
+                href="https://twitter.com/CitySmartSF"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-[#1d9bf0]"
+              >
+                @CitySmartSF
+              </a>
+              <span className="text-[#D1D5DB]">·</span>
               <span>© 2026 CitySmart</span>
             </div>
           </div>
