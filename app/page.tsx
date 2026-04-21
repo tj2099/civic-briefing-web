@@ -99,7 +99,7 @@ export default function Home() {
               className="text-sm font-medium text-[#EA580C] transition hover:text-[#C2410C]"
             >
               <span className="md:hidden">Sample →</span>
-              <span className="hidden md:inline whitespace-nowrap">Last week&apos;s newsletter →</span>
+              <span className="hidden md:inline whitespace-nowrap">Sample newsletter →</span>
             </Link>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function Home() {
                 href="/sample"
                 className="inline-flex items-center gap-3 text-[1.3rem] font-normal tracking-tight text-[#0F1C2E] transition hover:text-[#EA580C] [font-family:var(--font-serif)] md:text-[1.45rem]"
               >
-                <span>Read last week&apos;s newsletter</span>
+                <span>Read a sample newsletter</span>
                 <span className="text-[#EA580C]">→</span>
               </Link>
             </div>
