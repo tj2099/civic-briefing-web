@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useRef, useEffect, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -15,26 +15,12 @@ export default function SamplePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
   const [submitError, setSubmitError] = useState(false);
-  const [pillVisible, setPillVisible] = useState(false);
-
   function handleLoad() {
     const iframe = iframeRef.current;
     if (iframe?.contentDocument?.body) {
       iframe.style.height = iframe.contentDocument.body.scrollHeight + "px";
     }
   }
-
-  useEffect(() => {
-    function onScroll() {
-      const scrolled = window.scrollY > 300;
-      const ctaInView = ctaRef.current
-        ? ctaRef.current.getBoundingClientRect().top < window.innerHeight
-        : false;
-      setPillVisible(scrolled && !ctaInView);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -246,20 +232,6 @@ export default function SamplePage() {
         </div>
       </footer>
 
-      {/* Sticky subscribe pill */}
-      <div
-        className={`fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transition-all duration-300 ${
-          pillVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
-        }`}
-      >
-        <Link
-          href="#subscribe"
-          className="flex items-center gap-2 rounded-full bg-[#0F1C2E] px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-[#0F1C2E]/30 transition hover:bg-[#1a2f4a]"
-        >
-          <span className="whitespace-nowrap">Get CitySmart every week</span>
-          <span className="rounded-full bg-[#EA580C] px-3 py-0.5 text-xs font-bold whitespace-nowrap">Free →</span>
-        </Link>
-      </div>
     </div>
   );
 }
