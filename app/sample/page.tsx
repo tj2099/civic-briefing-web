@@ -144,7 +144,7 @@ export default function SamplePage() {
         </div>
 
         {/* Subscribe CTA block */}
-        <div ref={ctaRef} className="mt-12 rounded-2xl bg-[#0F1C2E] px-8 py-10 text-center md:px-12 md:py-12">
+        <div ref={ctaRef} id="subscribe" className="mt-12 rounded-2xl bg-[#0F1C2E] px-8 py-10 text-center md:px-12 md:py-12">
           <h2 className="text-2xl font-normal tracking-tight text-white [font-family:var(--font-serif)] md:text-3xl">
             Get CitySmart every week
           </h2>
@@ -165,25 +165,23 @@ export default function SamplePage() {
                 <option>San Francisco</option>
                 <option disabled>Coming soon...</option>
               </select>
-              <div className="flex gap-2.5">
-                <label className="sr-only" htmlFor="cta-email-m">Email</label>
-                <input
-                  id="cta-email-m"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="flex-1 rounded-lg border border-white/20 bg-white/8 px-4 py-3 text-sm text-white placeholder-white/40 outline-none focus:border-white/45"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="rounded-lg bg-[#EA580C] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#C2410C] whitespace-nowrap"
-                >
-                  {isSubmitting ? "..." : "Subscribe →"}
-                </button>
-              </div>
+              <label className="sr-only" htmlFor="cta-email-m">Email</label>
+              <input
+                id="cta-email-m"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                required
+                className="w-full rounded-lg border border-white/20 bg-white/8 px-4 py-3 text-sm text-white placeholder-white/40 outline-none focus:border-white/45"
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full rounded-lg bg-[#EA580C] py-3 text-sm font-semibold text-white transition hover:bg-[#C2410C]"
+              >
+                {isSubmitting ? "..." : "Subscribe →"}
+              </button>
             </div>
 
             {/* Desktop layout */}
@@ -255,7 +253,7 @@ export default function SamplePage() {
         }`}
       >
         <Link
-          href="/"
+          href="#subscribe"
           className="flex items-center gap-2 rounded-full bg-[#0F1C2E] px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-[#0F1C2E]/30 transition hover:bg-[#1a2f4a]"
         >
           <span className="whitespace-nowrap">Get CitySmart every week</span>
