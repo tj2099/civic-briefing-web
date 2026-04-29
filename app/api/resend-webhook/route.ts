@@ -36,6 +36,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
+  console.log("Resend webhook received", { type: event.type, unsubscribed: event.data?.unsubscribed, email: event.data?.email });
+
   // Resend fires contact.updated when a contact unsubscribes via a Broadcast link.
   if (event.type === "contact.updated" && event.data?.unsubscribed === true) {
     const email = event.data?.email?.trim().toLowerCase();
@@ -43,18 +45,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing email in event" }, { status: 400 });
     }
 
-    const { error } = await supabaseAdmin
+    const { error, count } = await supabaseAdmin
       .from("subscribers")
       .update({ status: "unsubscribed", unsubscribed_at: new Date().toISOString() })
       .eq("email", email)
       .eq("status", "active");
+
+    console.log("Supabase update result", { email, error, count });
 
     if (error) {
       console.error("Supabase update failed for unsubscribe webhook", { email, error });
       return NextResponse.json({ error: "Database update failed" }, { status: 500 });
     }
 
-    console.log("Unsubscribed via Resend webhook", { email });
+    console.log("Unsubscribed via Resend webhook", { email, rowsUpdated: count });
   }
 
   return NextResponse.json({ received: true });
