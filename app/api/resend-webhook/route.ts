@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Webhook } from "svix";
 import { supabaseAdmin } from "@/src/lib/supabase-admin";
 
-// Resend contact.unsubscribed event shape
+// Resend contact event shape (contact.created / contact.updated / contact.deleted)
 interface ResendContactEvent {
   type: string;
   data: {
@@ -10,7 +10,7 @@ interface ResendContactEvent {
     contact: {
       id: string;
       email: string;
-      unsubscribed: boolean;
+      unsubscribed?: boolean;
     };
   };
 }
@@ -38,7 +38,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  if (event.type === "contact.unsubscribed") {
+  // Resend fires contact.updated when a contact unsubscribes via a Broadcast link.
+  if (event.type === "contact.updated" && event.data?.contact?.unsubscribed === true) {
     const email = event.data?.contact?.email?.trim().toLowerCase();
     if (!email) {
       return NextResponse.json({ error: "Missing email in event" }, { status: 400 });
