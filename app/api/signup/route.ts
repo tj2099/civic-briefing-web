@@ -93,6 +93,33 @@ export async function POST(request: Request) {
     const isDuplicate = insertError.code === "23505";
 
     if (isDuplicate) {
+      // Check if they previously unsubscribed — if so, reactivate them.
+      const { data: existing } = await supabaseAdmin
+        .from("subscribers")
+        .select("id,status")
+        .eq("email", email)
+        .maybeSingle();
+
+      if (existing?.status === "unsubscribed") {
+        const { error: reactivateError } = await supabaseAdmin
+          .from("subscribers")
+          .update({ status: "active", unsubscribed_at: null })
+          .eq("id", existing.id);
+
+        if (reactivateError) {
+          return NextResponse.json<SignupResponse>(
+            { ok: false, status: "error", message: "Unable to process signup right now." },
+            { status: 500 },
+          );
+        }
+
+        return NextResponse.json<SignupResponse>({
+          ok: true,
+          status: "success",
+          message: `Welcome back — you're re-subscribed to ${city.name} briefings.`,
+        });
+      }
+
       return NextResponse.json<SignupResponse>({
         ok: true,
         status: "duplicate",
