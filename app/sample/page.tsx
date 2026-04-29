@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+
 export default function SamplePage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -35,42 +36,23 @@ export default function SamplePage() {
         return;
       }
 
-      const fallbackCityId = city.toLowerCase().replace(/\s+/g, "-");
-      let cityId: string | number = fallbackCityId;
-
       const cityLookup = await supabase.from("cities").select("id").eq("name", city).maybeSingle();
-      if (cityLookup.error) {
-        console.warn("city lookup failed, using fallback city_id", cityLookup.error);
-      } else if (cityLookup.data?.id !== undefined && cityLookup.data?.id !== null) {
-        cityId = cityLookup.data.id;
-      }
+      const cityId = cityLookup.data?.id ?? city.toLowerCase().replace(/\s+/g, "-");
 
-      const { error } = await supabase.from("subscribers").insert({
-        email: normalizedEmail,
-        city_id: cityId,
-        status: "active",
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail, cityId }),
       });
+      const data = await res.json();
 
-      if (error) {
-        const isDuplicate =
-          error.code === "23505" || /duplicate key value/i.test(error.message || "");
-        if (isDuplicate) {
-          setSubmitError(false);
-          setSubmitMessage("You're already subscribed to this city.");
-          return;
-        }
-        setSubmitError(true);
-        setSubmitMessage(error.message || "Signup failed. Check console for details.");
-        return;
-      }
-
-      setSubmitError(false);
-      setSubmitMessage("Thanks — you're on the list.");
-      setEmail("");
+      setSubmitError(!data.ok && data.status !== "duplicate");
+      setSubmitMessage(data.message);
+      if (data.ok) setEmail("");
     } catch (err) {
       console.error("signup submit exception", err);
       setSubmitError(true);
-      setSubmitMessage("Signup failed. Check console for details.");
+      setSubmitMessage("Signup failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
