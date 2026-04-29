@@ -1,5 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/src/lib/supabase-admin";
+import { Resend } from "resend";
+
+async function removeFromResendAudience(email: string): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_AUDIENCE_ID;
+  if (!apiKey || !audienceId) return;
+
+  try {
+    const resend = new Resend(apiKey);
+    await resend.contacts.update({ audienceId, email, unsubscribed: true });
+  } catch (err) {
+    // Non-fatal — Supabase is the source of truth; log and continue.
+    console.warn("Failed to mark contact unsubscribed in Resend", { email, err });
+  }
+}
 
 type PageState = "success" | "already" | "invalid" | "error";
 
@@ -78,7 +93,7 @@ export async function GET(
 
   const { data: subscriber, error: lookupError } = await supabaseAdmin
     .from("subscribers")
-    .select("id,unsubscribed_at,status")
+    .select("id,email,unsubscribed_at,status")
     .eq("unsubscribe_token", token)
     .maybeSingle();
 
@@ -92,6 +107,10 @@ export async function GET(
     .eq("id", subscriber.id);
 
   if (updateError) return respond("error");
+
+  // Best-effort: mirror the unsubscribe to Resend so they don't receive future broadcasts.
+  await removeFromResendAudience(subscriber.email);
+
   return respond("success");
 }
 
