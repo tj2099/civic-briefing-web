@@ -7,11 +7,9 @@ interface ResendContactEvent {
   type: string;
   data: {
     audience_id: string;
-    contact: {
-      id: string;
-      email: string;
-      unsubscribed?: boolean;
-    };
+    id: string;
+    email: string;
+    unsubscribed?: boolean;
   };
 }
 
@@ -39,8 +37,8 @@ export async function POST(request: NextRequest) {
   }
 
   // Resend fires contact.updated when a contact unsubscribes via a Broadcast link.
-  if (event.type === "contact.updated" && event.data?.contact?.unsubscribed === true) {
-    const email = event.data?.contact?.email?.trim().toLowerCase();
+  if (event.type === "contact.updated" && event.data?.unsubscribed === true) {
+    const email = event.data?.email?.trim().toLowerCase();
     if (!email) {
       return NextResponse.json({ error: "Missing email in event" }, { status: 400 });
     }
