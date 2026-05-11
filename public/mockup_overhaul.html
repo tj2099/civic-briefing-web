@@ -1351,25 +1351,32 @@ body {
 
 /* Global toast notification */
 .toast {
-  position: fixed;
-  top: 20px;
+  position: fixed !important;
+  top: 24px;
   left: 50%;
-  transform: translateX(-50%) translateY(-200%);
+  margin-left: -160px;
+  width: 320px;
+  max-width: 90vw;
   background: #16a34a;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
+  color: #fff !important;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
   font-family: var(--sans);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
-  z-index: 2000;
-  transition: transform 0.32s cubic-bezier(.2,.7,.3,1);
-  max-width: 92vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  z-index: 99999 !important;
   text-align: center;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility 0s linear .25s;
 }
-.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .25s ease;
+}
 .toast.error { background: #dc2626; }
 </style>
 </head>
@@ -3027,14 +3034,25 @@ function updateNavState(id) {
 }
 
 function showToast(message, isError) {
-  var toast = document.getElementById('global-toast');
-  if (!toast) return;
-  toast.textContent = message;
-  toast.className = 'toast show' + (isError ? ' error' : '');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(function() {
-    toast.classList.remove('show');
-  }, 3500);
+  try {
+    var toast = document.getElementById('global-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'global-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.className = 'toast show' + (isError ? ' error' : '');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function() {
+      toast.classList.remove('show');
+    }, 4500);
+  } catch (err) {
+    // Fallback so user always sees confirmation even if toast breaks
+    try { alert(message); } catch (e) {}
+  }
 }
 
 function handleEndSubscribe(button) {
