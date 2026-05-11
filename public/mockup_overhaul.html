@@ -3057,18 +3057,21 @@ function showToast(message, isError) {
 // Real backend call — POSTs to /api/signup which writes to the Supabase subscribers table.
 // callback(ok: boolean, message: string, status: string)
 function submitSignup(email, cityName, callback) {
+  var payload = { email: email, cityName: cityName || 'San Francisco' };
+  console.log('[signup] POST /api/signup', payload);
   fetch('/api/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, cityName: cityName || 'San Francisco' })
+    body: JSON.stringify(payload)
   })
-  .then(function(res) { return res.json().then(function(data) { return { status: res.status, data: data }; }); })
+  .then(function(res) { return res.json().then(function(data) { return { httpStatus: res.status, data: data }; }); })
   .then(function(result) {
+    console.log('[signup] response', result);
     var d = result.data || {};
     callback(!!d.ok, d.message || 'Signup failed. Please try again.', d.status || 'error');
   })
   .catch(function(err) {
-    console.error('signup network error', err);
+    console.error('[signup] network error', err);
     callback(false, 'Network error. Please try again.', 'error');
   });
 }

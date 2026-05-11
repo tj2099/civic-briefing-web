@@ -95,14 +95,21 @@ export async function POST(request: Request) {
     );
   }
 
-  const { error: insertError } = await supabaseAdmin.from("subscribers").insert({
-    email,
-    city_id: city.id,
-    status: "active",
-  });
+  console.log(`[signup] inserting email=${email} city_id=${city.id} city_name=${city.name}`);
+
+  const { data: inserted, error: insertError } = await supabaseAdmin
+    .from("subscribers")
+    .insert({
+      email,
+      city_id: city.id,
+      status: "active",
+    })
+    .select("id,email,city_id,created_at")
+    .single();
 
   if (insertError) {
     const isDuplicate = insertError.code === "23505";
+    console.log(`[signup] insert error code=${insertError.code} duplicate=${isDuplicate} message=${insertError.message}`);
 
     if (isDuplicate) {
       // Check if they previously unsubscribed — if so, reactivate them.
@@ -145,9 +152,12 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json<SignupResponse>({
+  console.log(`[signup] success id=${inserted?.id} email=${inserted?.email}`);
+
+  return NextResponse.json({
     ok: true,
     status: "success",
     message: `Thanks - you're signed up for ${city.name} briefings.`,
+    subscriber: inserted,
   });
 }
