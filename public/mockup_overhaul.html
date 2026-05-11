@@ -1348,6 +1348,29 @@ body {
 @media (max-width: 560px) {
   .topics-grid { grid-template-columns: 1fr; }
 }
+
+/* Global toast notification */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-200%);
+  background: #16a34a;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--sans);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  z-index: 2000;
+  transition: transform 0.32s cubic-bezier(.2,.7,.3,1);
+  max-width: 92vw;
+  text-align: center;
+  pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.error { background: #dc2626; }
 </style>
 </head>
 <body>
@@ -1881,7 +1904,7 @@ body {
     <div class="end-sub-dek">Free. Plain English. In your inbox every week.</div>
     <div class="end-sub-form">
       <select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com">
-      <button class="end-sub-btn">Subscribe</button>
+      <button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button>
     </div>
   </div>
 
@@ -2046,7 +2069,7 @@ body {
     <div class="end-sub-dek">Free. Plain English. In your inbox every week.</div>
     <div class="end-sub-form">
       <select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com">
-      <button class="end-sub-btn">Subscribe</button>
+      <button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button>
     </div>
   </div>
 
@@ -2182,7 +2205,7 @@ body {
     <div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div>
     <div class="end-sub-form">
       <select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com">
-      <button class="end-sub-btn">Subscribe</button>
+      <button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button>
     </div>
   </div>
 
@@ -2352,7 +2375,7 @@ body {
     <div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div>
     <div class="end-sub-form">
       <select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com">
-      <button class="end-sub-btn">Subscribe</button>
+      <button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button>
     </div>
   </div>
 
@@ -2509,7 +2532,7 @@ body {
     <div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div>
     <div class="end-sub-form">
       <select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com">
-      <button class="end-sub-btn">Subscribe</button>
+      <button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button>
     </div>
   </div>
 
@@ -2569,7 +2592,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2609,7 +2632,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2649,7 +2672,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2689,7 +2712,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2729,7 +2752,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2769,7 +2792,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2809,7 +2832,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2849,7 +2872,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2889,7 +2912,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2929,7 +2952,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -2969,7 +2992,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn">Subscribe</button></div></div>
+  <div class="end-subscribe"><div class="end-sub-eyebrow">Stay informed</div><div class="end-sub-hed">The weekly SF briefing, <em>delivered to your inbox</em></div><div class="end-sub-dek">Plain-language summaries of what the Board of Supervisors actually did. No spin.</div><div class="end-sub-form"><select class="end-sub-select"><option value="sf">San Francisco</option></select><input class="end-sub-input" type="email" placeholder="your@email.com"><button class="end-sub-btn" onclick="handleEndSubscribe(this)">Subscribe</button></div></div>
   <footer class="site-footer"><div class="site-footer-inner"><div><div class="footer-brand">CitySmart<span class="sf">SF</span></div><div class="footer-tag">Independent coverage of San Francisco city government</div></div><div class="footer-links"><a onclick="goTo('about')">About</a><span class="footer-sep">&middot;</span><a onclick="goTo('past-issues')">Archive</a><span class="footer-sep">&middot;</span><a href="#">Privacy</a></div></div></footer>
 </div>
 
@@ -3003,6 +3026,37 @@ function updateNavState(id) {
   }
 }
 
+function showToast(message, isError) {
+  var toast = document.getElementById('global-toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.className = 'toast show' + (isError ? ' error' : '');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(function() {
+    toast.classList.remove('show');
+  }, 3500);
+}
+
+function handleEndSubscribe(button) {
+  var form = button.closest('.end-sub-form');
+  if (!form) return;
+  var input = form.querySelector('.end-sub-input');
+  if (!input) return;
+  var val = input.value.trim();
+  if (!val || !val.includes('@')) {
+    showToast('Please enter a valid email address', true);
+    input.focus();
+    return;
+  }
+  var originalText = button.textContent;
+  button.textContent = '…'; button.disabled = true;
+  setTimeout(function() {
+    button.textContent = originalText; button.disabled = false;
+    input.value = '';
+    showToast("You're on the list — see you Friday!");
+  }, 600);
+}
+
 function handleSignup(e) {
   e.preventDefault();
   var btn = document.getElementById('sub-btn');
@@ -3010,12 +3064,17 @@ function handleSignup(e) {
   var err = document.getElementById('msg-err');
   var val = document.getElementById('email-in').value.trim();
   ok.style.display = err.style.display = 'none';
-  if (!val || !val.includes('@')) { err.style.display = 'block'; return; }
+  if (!val || !val.includes('@')) {
+    err.style.display = 'block';
+    showToast('Please enter a valid email address', true);
+    return;
+  }
   btn.textContent = '…'; btn.disabled = true;
   setTimeout(function() {
     ok.style.display = 'block';
-    btn.textContent = 'Subscribe free →'; btn.disabled = false;
+    btn.textContent = 'Subscribe →'; btn.disabled = false;
     document.getElementById('email-in').value = '';
+    showToast("You're on the list — see you Friday!");
   }, 600);
 }
 
@@ -3046,13 +3105,19 @@ function handleOverlayClick(e) {
 function handleModalSignup(e) {
   e.preventDefault();
   var btn = document.getElementById('modal-sub-btn');
-  var val = document.getElementById('modal-email-in').value.trim();
-  if (!val || !val.includes('@')) return;
+  var input = document.getElementById('modal-email-in');
+  var val = input.value.trim();
+  if (!val || !val.includes('@')) {
+    showToast('Please enter a valid email address', true);
+    input.focus();
+    return;
+  }
   btn.textContent = '…'; btn.disabled = true;
   setTimeout(function() {
     closeSubModal();
     btn.textContent = 'Subscribe'; btn.disabled = false;
-    document.getElementById('modal-email-in').value = '';
+    input.value = '';
+    showToast("You're on the list — see you Friday!");
   }, 600);
 }
 
@@ -3091,7 +3156,20 @@ document.addEventListener('click', function(e) {
     closeMobileNav();
   }
 });
+
+// Enter key submits the end-subscribe forms (which aren't real <form>s)
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  if (!e.target.classList || !e.target.classList.contains('end-sub-input')) return;
+  e.preventDefault();
+  var form = e.target.closest('.end-sub-form');
+  if (!form) return;
+  var btn = form.querySelector('.end-sub-btn');
+  if (btn) handleEndSubscribe(btn);
+});
 </script>
+
+<div id="global-toast" class="toast" role="status" aria-live="polite"></div>
 
 </body>
 </html>
