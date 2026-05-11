@@ -30,7 +30,7 @@
   --sans:       'Geist', system-ui, -apple-system, sans-serif;
 }
 
-html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (min-width: 1024px) and (max-width: 1599px) {
   html { zoom: 0.9; }
 }
@@ -1275,7 +1275,8 @@ body {
   .chart-hed { font-size: 1.3rem; line-height: 1.25; }
   .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
-  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; }
+  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; max-width: 100vw; overflow-x: hidden; }
+  .chart-section svg { max-width: 100%; height: auto; display: block; }
   .article-body { padding-top: 20px; }
   /* Hero images: explicit calc() height — bulletproof 3:2 ratio */
   .hero-illus { position: relative; width: 100%; height: calc((100vw - 44px) * 2 / 3); aspect-ratio: auto; max-width: 100%; }
