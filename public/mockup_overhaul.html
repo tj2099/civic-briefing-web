@@ -1220,35 +1220,53 @@ body {
    RESPONSIVE
 ═══════════════════════════════ */
 @media (max-width: 900px) {
-  .home-inner { padding: 0 24px; }
-  .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 52px; }
+  /* ── Homepage layout ── */
+  .home-inner { padding: 0 22px; }
+  .hero { grid-template-columns: 1fr; gap: 0; padding: 32px 0 40px; }
   .hero-right { display: none; }
-  .topics-grid { grid-template-columns: 1fr 1fr; }
-  .about-inner { grid-template-columns: 1fr; padding: 48px 24px; }
-  .portrait-wrap { display: none; }
-  .sample-inner { padding: 40px 24px 56px; }
-  .section-label-bar, .article-wrap { padding-left: 20px; padding-right: 20px; }
-  .chart-section { margin: 28px -20px; padding: 28px 20px 24px; }
-  .photo-pair { grid-template-columns: 1fr; }
-  .hero-illus { aspect-ratio: 4/3; }
-  .key-numbers { grid-template-columns: repeat(2, 1fr); }
-  .action-row { grid-template-columns: 60px 1fr; gap: 10px; }
-  .action-vote, .action-badge { display: none; }
-  .actions-col-headers { grid-template-columns: 60px 1fr; }
-  .district-sections { grid-template-columns: 1fr; }
-  .district-hero { aspect-ratio: 4/3; }
-  .district-intro, .district-sections { padding-left: 20px; padding-right: 20px; }
-  .site-footer-inner { padding: 20px 24px; }
+  .hero-h1 { font-size: clamp(2.6rem, 10vw, 3.6rem); }
+  .hero-sub { margin-top: 16px; font-size: 1.02rem; max-width: none; }
 
-  /* Mobile article typography — Morning Brew-style readability */
-  .article-wrap { padding-left: 22px; padding-right: 22px; }
-  .article-body { padding-top: 24px; }
+  /* Mobile form: city on top row, email + button on second row */
+  .form-wrap { margin-top: 24px; }
+  .form-row {
+    flex-wrap: wrap;
+    height: auto;
+  }
+  .form-row select {
+    width: 100%;
+    height: 46px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .form-row input {
+    flex: 1;
+    height: 52px;
+    min-width: 0;
+    border-right: none;
+  }
+  .form-row button {
+    height: 52px;
+    padding: 0 22px;
+  }
+  .form-meta { margin-top: 12px; }
+  .sample-cta-link { font-size: 1.15rem; }
+
+  /* ── Section / neighborhood page layout ── */
+  .section-label-bar { padding: 20px 22px 16px; }
+  .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
+  .article-wrap { padding-top: 0; padding-bottom: 48px; }
+  .article-body { padding-top: 20px; }
+  .hero-illus { aspect-ratio: 16/9; }
+
+  /* Article typography */
   .article-prose p {
     font-size: 1.08rem;
     line-height: 1.75;
     margin-bottom: 1.65em;
   }
-  /* Remove drop cap on mobile — looks clunky at small sizes */
+  /* No drop cap on mobile */
   .article-prose p:first-child::first-letter {
     font-size: inherit;
     font-weight: inherit;
@@ -1257,20 +1275,38 @@ body {
     margin: 0;
     color: inherit;
   }
-  /* More room above/below charts */
-  .chart-section { margin-top: 32px; margin-bottom: 32px; }
-  /* Tighter action rows on mobile */
-  .action-row { padding: 16px 0; }
+
+  /* Charts */
+  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; }
+
+  /* Action rows */
+  .action-row { grid-template-columns: 60px 1fr; gap: 10px; padding: 16px 0; }
+  .action-vote, .action-badge { display: none; }
   .action-hed { font-size: 0.95rem; }
+  .actions-col-headers { grid-template-columns: 60px 1fr; }
   .actions-section { margin-top: 36px; }
 
-  /* District page typography */
-  .district-intro { padding: 24px 22px 0; }
-  .district-intro p { font-size: 1.08rem; line-height: 1.72; }
-  .district-sections { padding: 24px 22px 0; }
-  .district-section { margin-bottom: 40px; padding-bottom: 40px; }
+  /* ── District page layout ── */
+  .district-intro { padding: 20px 22px 0; }
+  .district-intro p { font-size: 1.05rem; line-height: 1.72; }
+  .district-sections { grid-template-columns: 1fr; padding: 20px 22px 0; }
+  .district-hero { aspect-ratio: 16/9; }
+  .district-intro, .district-sections { padding-left: 22px; padding-right: 22px; }
+  .district-section { margin-bottom: 36px; padding-bottom: 36px; }
   .district-section-hd { font-size: 1.2rem; margin-bottom: 10px; }
   .district-section p { font-size: 1.05rem; line-height: 1.72; margin-bottom: 1em; }
+
+  /* ── Other ── */
+  .topics-grid { grid-template-columns: 1fr 1fr; }
+  .about-inner { grid-template-columns: 1fr; padding: 40px 22px; }
+  .portrait-wrap { display: none; }
+  .sample-inner { padding: 36px 22px 48px; }
+  .photo-pair { grid-template-columns: 1fr; }
+  .key-numbers { grid-template-columns: repeat(2, 1fr); }
+  .site-footer-inner { padding: 20px 22px; }
+}
+@media (max-width: 560px) {
+  .topics-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .topics-grid { grid-template-columns: 1fr; }
