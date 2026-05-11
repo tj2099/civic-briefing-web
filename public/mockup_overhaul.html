@@ -1224,31 +1224,39 @@ body {
   .home-inner { padding: 0 22px; }
   .hero { grid-template-columns: 1fr; gap: 0; padding: 32px 0 40px; }
   .hero-right { display: none; }
-  .hero-h1 { font-size: clamp(2.6rem, 10vw, 3.6rem); }
-  .hero-sub { margin-top: 16px; font-size: 1.02rem; max-width: none; }
+  /* Two clean lines: hide <br> tags, let text wrap naturally */
+  .hero-h1 { font-size: 2.05rem; line-height: 1.08; }
+  .hero-h1 br { display: none; }
+  .hero-sub { margin-top: 16px; font-size: 1.0rem; max-width: none; }
 
-  /* Mobile form: city on top row, email + button on second row */
+  /* Mobile form: email + subscribe first, city picker below with gap */
   .form-wrap { margin-top: 24px; }
   .form-row {
     flex-wrap: wrap;
     height: auto;
   }
   .form-row select {
+    order: 3;
     width: 100%;
     height: 46px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border);
     border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     flex-shrink: 0;
   }
   .form-row input {
+    order: 1;
     flex: 1;
     height: 52px;
     min-width: 0;
     border-right: none;
+    border-bottom: 1px solid var(--border);
   }
   .form-row button {
+    order: 2;
     height: 52px;
     padding: 0 22px;
+    border-bottom: 1px solid var(--border);
   }
   .form-meta { margin-top: 12px; }
   .sample-cta-link { font-size: 1.15rem; }
@@ -1258,13 +1266,13 @@ body {
   .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
   .article-body { padding-top: 20px; }
-  .hero-illus { aspect-ratio: 16/9; }
+  .hero-illus { aspect-ratio: 3/2; width: 100%; }
 
   /* Article typography */
   .article-prose p {
-    font-size: 1.08rem;
-    line-height: 1.75;
-    margin-bottom: 1.65em;
+    font-size: 0.97rem;
+    line-height: 1.72;
+    margin-bottom: 1.4em;
   }
   /* No drop cap on mobile */
   .article-prose p:first-child::first-letter {
@@ -1288,13 +1296,13 @@ body {
 
   /* ── District page layout ── */
   .district-intro { padding: 20px 22px 0; }
-  .district-intro p { font-size: 1.05rem; line-height: 1.72; }
+  .district-intro p { font-size: 0.97rem; line-height: 1.7; }
   .district-sections { grid-template-columns: 1fr; padding: 20px 22px 0; }
-  .district-hero { aspect-ratio: 16/9; }
+  .district-hero { aspect-ratio: 3/2; }
   .district-intro, .district-sections { padding-left: 22px; padding-right: 22px; }
-  .district-section { margin-bottom: 36px; padding-bottom: 36px; }
-  .district-section-hd { font-size: 1.2rem; margin-bottom: 10px; }
-  .district-section p { font-size: 1.05rem; line-height: 1.72; margin-bottom: 1em; }
+  .district-section { margin-bottom: 32px; padding-bottom: 32px; }
+  .district-section-hd { font-size: 1.1rem; margin-bottom: 8px; }
+  .district-section p { font-size: 0.97rem; line-height: 1.7; margin-bottom: 0.9em; }
 
   /* ── Other ── */
   .topics-grid { grid-template-columns: 1fr 1fr; }
@@ -1453,7 +1461,7 @@ body {
 
       <div class="hero">
         <div class="hero-left">
-          <h1 class="hero-h1">Your city<br>council,<br>made<br>readable.</h1>
+          <h1 class="hero-h1">Your city<br>council,<br>made<br>readable</h1>
           <p class="hero-sub">
             CitySmart sends a <span class="ul">weekly briefing</span> to your inbox every Friday covering what your city council or board of supervisors decided — and why it matters. Join your neighbors and see what your government is up to.
           </p>
