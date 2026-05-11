@@ -1239,6 +1239,38 @@ body {
   .district-hero { aspect-ratio: 4/3; }
   .district-intro, .district-sections { padding-left: 20px; padding-right: 20px; }
   .site-footer-inner { padding: 20px 24px; }
+
+  /* Mobile article typography — Morning Brew-style readability */
+  .article-wrap { padding-left: 22px; padding-right: 22px; }
+  .article-body { padding-top: 24px; }
+  .article-prose p {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    margin-bottom: 1.65em;
+  }
+  /* Remove drop cap on mobile — looks clunky at small sizes */
+  .article-prose p:first-child::first-letter {
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    line-height: inherit;
+    margin: 0;
+    color: inherit;
+  }
+  /* More room above/below charts */
+  .chart-section { margin-top: 32px; margin-bottom: 32px; }
+  /* Tighter action rows on mobile */
+  .action-row { padding: 16px 0; }
+  .action-hed { font-size: 0.95rem; }
+  .actions-section { margin-top: 36px; }
+
+  /* District page typography */
+  .district-intro { padding: 24px 22px 0; }
+  .district-intro p { font-size: 1.08rem; line-height: 1.72; }
+  .district-sections { padding: 24px 22px 0; }
+  .district-section { margin-bottom: 40px; padding-bottom: 40px; }
+  .district-section-hd { font-size: 1.2rem; margin-bottom: 10px; }
+  .district-section p { font-size: 1.05rem; line-height: 1.72; margin-bottom: 1em; }
 }
 @media (max-width: 560px) {
   .topics-grid { grid-template-columns: 1fr; }
