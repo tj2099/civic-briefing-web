@@ -767,6 +767,11 @@ body {
   width: 100%; display: block;
   height: 380px; object-fit: cover;
 }
+.photo-pair figure { margin: 0; display: flex; flex-direction: column; }
+.photo-pair figcaption {
+  font-size: 0.85rem; color: var(--fg3);
+  line-height: 1.45; margin-top: 8px; padding: 0 2px;
+}
 .photo-single { margin-top: 20px; }
 .photo-single img { width: 100%; display: block; }
 
@@ -2098,14 +2103,20 @@ body {
 
     <section class="chart-section">
       <h3 class="chart-hed">Clean energy storage and zero-emission fueling infrastructure</h3>
-      <p class="chart-sub">Left: The Willow Rock Long Duration Storage Project, a 20-year contract committing $75.9 million to dispatchable renewable energy for CleanPowerSF customers beginning in 2030. Right: A hydrogen fueling station representative of the infrastructure class covered by the Board&rsquo;s new permitting framework.</p>
+      <p class="chart-sub">The Willow Rock Long Duration Storage Project commits $75.9 million over 20 years to dispatchable renewable energy for CleanPowerSF customers beginning in 2030. Hydrogen fueling stations represent the infrastructure class covered by the Board&rsquo;s new permitting framework.</p>
       <div class="photo-pair">
-        <img src="assets/CitySmartSF_Willow Rock Energy Storage_Climate.jpg"
-             alt="Aerial rendering of the Willow Rock Long Duration Energy Storage facility"
-             onerror="this.style.height='200px';this.style.background='#1a3a4a';this.style.display='block'">
-        <img src="assets/CitySmartSF_Hydrogen Fueling Station_Climate.webp"
-             alt="True Zero hydrogen fueling station"
-             onerror="this.style.height='200px';this.style.background='#1a3a2a';this.style.display='block'">
+        <figure>
+          <img src="assets/CitySmartSF_Willow Rock Energy Storage_Climate.jpg"
+               alt="Aerial rendering of the Willow Rock Long Duration Energy Storage facility"
+               onerror="this.style.height='200px';this.style.background='#1a3a4a';this.style.display='block'">
+          <figcaption>Willow Rock Long Duration Storage Project &mdash; aerial rendering</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/CitySmartSF_Hydrogen Fueling Station_Climate.webp"
+               alt="True Zero hydrogen fueling station"
+               onerror="this.style.height='200px';this.style.background='#1a3a2a';this.style.display='block'">
+          <figcaption>Hydrogen fueling station, an infrastructure class newly permitted</figcaption>
+        </figure>
       </div>
       <p class="chart-source">Source: SF Board of Supervisors meeting minutes, Jan&ndash;Apr 2026.</p>
     </section>
@@ -2401,14 +2412,20 @@ body {
 
     <section class="chart-section">
       <h3 class="chart-hed">Preserving the Mission&rsquo;s cultural geography</h3>
-      <p class="chart-sub">Left: The Latin Rock House at 22nd and Mission, landmark-designated by the Board in 2026. Right: An independent cinema representative of the venue type protected by the Board&rsquo;s movie theater alcohol ordinance &mdash; a policy designed to help exhibition economics survive by layering revenue streams.</p>
+      <p class="chart-sub">The Latin Rock House at 22nd and Mission was landmark-designated by the Board in 2026. Independent cinemas are the venue type protected by the Board&rsquo;s movie theater alcohol ordinance &mdash; a policy designed to help exhibition economics survive by layering revenue streams.</p>
       <div class="photo-pair">
-        <img src="assets/CitySmartSF_Latin Rock House_Arts &amp; Culture.webp"
-             alt="The Latin Rock House at 22nd and Mission Street in San Francisco"
-             onerror="this.style.height='200px';this.style.background='#2a1a1a';this.style.display='block'">
-        <img src="assets/CitySmartSF_Independent Movie Theater_Arts and Culture.jpg"
-             alt="An independent movie theater marquee in San Francisco"
-             onerror="this.style.height='200px';this.style.background='#1a1a2a';this.style.display='block'">
+        <figure>
+          <img src="assets/CitySmartSF_Latin Rock House_Arts &amp; Culture.webp"
+               alt="The Latin Rock House at 22nd and Mission Street in San Francisco"
+               onerror="this.style.height='200px';this.style.background='#2a1a1a';this.style.display='block'">
+          <figcaption>The Latin Rock House at 22nd &amp; Mission &mdash; landmark-designated in 2026</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/CitySmartSF_Independent Movie Theater_Arts and Culture.jpg"
+               alt="An independent movie theater marquee in San Francisco"
+               onerror="this.style.height='200px';this.style.background='#1a1a2a';this.style.display='block'">
+          <figcaption>Independent cinema &mdash; the venue type protected by the new alcohol ordinance</figcaption>
+        </figure>
       </div>
       <p class="chart-source">Source: SF Board of Supervisors meeting minutes, Jan&ndash;Apr 2026.</p>
     </section>
@@ -2437,14 +2454,20 @@ body {
 
     <section class="chart-section">
       <h3 class="chart-hed">A gap in the framework &mdash; and a new kind of venue</h3>
-      <p class="chart-sub">Left: The Vaillancourt Fountain at Embarcadero Plaza, approved for removal by a 10-1 Board vote &mdash; the lone dissent from Supervisor Fielder underscoring how little procedural protection public art holds. Right: A cannabis caf&eacute; of the type that could emerge under Mandelman&rsquo;s proposed on-premises consumption permit ordinance.</p>
+      <p class="chart-sub">The Vaillancourt Fountain at Embarcadero Plaza was approved for removal by a 10-1 Board vote &mdash; the lone dissent from Supervisor Fielder underscoring how little procedural protection public art holds. Cannabis caf&eacute;s are the type of venue that could emerge under Mandelman&rsquo;s proposed on-premises consumption permit ordinance.</p>
       <div class="photo-pair">
-        <img src="assets/CitySmartSF_Vaillancourt Fountain_Arts &amp; Culture.webp"
-             alt="The Vaillancourt Fountain at Embarcadero Plaza in San Francisco"
-             onerror="this.style.height='200px';this.style.background='#1a2a1a';this.style.display='block'">
-        <img src="assets/CitySmartSF_Cannabis Cafe_Arts &amp; Culture.png"
-             alt="Interior of a cannabis café with ambient lighting and seating"
-             onerror="this.style.height='200px';this.style.background='#1a1a2a';this.style.display='block'">
+        <figure>
+          <img src="assets/CitySmartSF_Vaillancourt Fountain_Arts &amp; Culture.webp"
+               alt="The Vaillancourt Fountain at Embarcadero Plaza in San Francisco"
+               onerror="this.style.height='200px';this.style.background='#1a2a1a';this.style.display='block'">
+          <figcaption>Vaillancourt Fountain at Embarcadero Plaza &mdash; approved for removal (10-1 vote)</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/CitySmartSF_Cannabis Cafe_Arts &amp; Culture.png"
+               alt="Interior of a cannabis café with ambient lighting and seating"
+               onerror="this.style.height='200px';this.style.background='#1a1a2a';this.style.display='block'">
+          <figcaption>Cannabis caf&eacute; &mdash; a new venue type under the proposed consumption ordinance</figcaption>
+        </figure>
       </div>
       <p class="chart-source">Source: SF Board of Supervisors meeting minutes, Jan&ndash;Apr 2026.</p>
     </section>
