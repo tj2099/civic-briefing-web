@@ -1271,21 +1271,24 @@ body {
 
   /* ── Section / neighborhood page layout ── */
   .section-label-bar { padding: 16px 22px 14px; }
-  .section-title { font-size: 5rem; font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
-  .chart-hed { font-size: 1.45rem; line-height: 1.25; }
+  .section-title { font-size: 3.8rem; font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
+  .chart-hed { font-size: 1.3rem; line-height: 1.25; }
   .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
-  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; }
+  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .chart-section svg { width: 700px; min-width: 700px; }
   .article-body { padding-top: 20px; }
   .hero-illus { aspect-ratio: 3/2; width: 100%; }
+  /* Match district image treatment: absolute + slight zoom so object-fit fills evenly */
+  .hero-illus img { position: absolute; top: -8%; left: -8%; width: 116%; height: 116%; object-position: 50% 35%; }
   /* Hide hero overlay text on mobile — clean image only */
   .hero-illus-overlay { display: none; }
 
-  /* Article typography — Morning Brew scale */
+  /* Article typography */
   .article-prose p {
-    font-size: 1.15rem;
+    font-size: 1.0rem;
     line-height: 1.75;
-    margin-bottom: 1.5em;
+    margin-bottom: 1.4em;
   }
   /* No drop cap on mobile */
   .article-prose p:first-child::first-letter {
