@@ -1219,55 +1219,67 @@ body {
 @media (max-width: 900px) {
   /* ── Homepage layout ── */
   .home-inner { padding: 0 22px; }
-  .hero { grid-template-columns: 1fr; gap: 0; padding: 32px 0 40px; }
+  .hero { grid-template-columns: 1fr; gap: 0; padding: 28px 0 40px; }
   .hero-right { display: none; }
-  /* Two clean lines: hide <br> tags, let text wrap naturally */
-  .hero-h1 { font-size: 2.05rem; line-height: 1.08; }
-  .hero-h1 br { display: none; }
+  .hero-h1 { font-size: clamp(2.5rem, 9.5vw, 3.4rem); line-height: 1.06; }
   .hero-sub { margin-top: 16px; font-size: 1.0rem; max-width: none; }
 
-  /* Mobile form: email + subscribe first, city picker below with gap */
-  .form-wrap { margin-top: 24px; }
+  /* Mobile form: email large + full-width first, then city (L) + subscribe (R) */
+  .form-wrap { margin-top: 22px; }
   .form-row {
     flex-wrap: wrap;
     height: auto;
-  }
-  .form-row select {
-    order: 3;
-    width: 100%;
-    height: 46px;
-    margin-top: 10px;
-    border-top: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    gap: 0;
   }
   .form-row input {
     order: 1;
+    width: 100%;
+    height: 58px;
+    flex: none;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--white);
+    font-size: 1rem;
+    padding: 0 18px;
+  }
+  .form-row select {
+    order: 2;
     flex: 1;
-    height: 52px;
-    min-width: 0;
+    height: 50px;
+    border: 1px solid var(--border);
     border-right: none;
-    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    font-size: 14px;
+    padding: 0 10px 0 14px;
+    min-width: 0;
   }
   .form-row button {
-    order: 2;
-    height: 52px;
-    padding: 0 22px;
-    border-bottom: 1px solid var(--border);
+    order: 3;
+    height: 50px;
+    padding: 0 20px;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .form-meta { margin-top: 12px; }
   .sample-cta-link { font-size: 1.15rem; }
 
   /* ── Section / neighborhood page layout ── */
-  .section-label-bar { padding: 20px 22px 16px; }
+  .section-label-bar { padding: 16px 22px 14px; }
+  .section-title { font-size: 2.8rem; font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
   .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
   .article-body { padding-top: 20px; }
   .hero-illus { aspect-ratio: 3/2; width: 100%; }
+  /* Hide hero overlay text on mobile — clean image only */
+  .hero-illus-overlay { display: none; }
 
-  /* Article typography */
+  /* Article typography — Morning Brew scale */
   .article-prose p {
-    font-size: 0.97rem;
+    font-size: 1.05rem;
     line-height: 1.72;
     margin-bottom: 1.4em;
   }
@@ -1293,13 +1305,13 @@ body {
 
   /* ── District page layout ── */
   .district-intro { padding: 20px 22px 0; }
-  .district-intro p { font-size: 0.97rem; line-height: 1.7; }
+  .district-intro p { font-size: 1.05rem; line-height: 1.7; }
   .district-sections { grid-template-columns: 1fr; padding: 20px 22px 0; }
   .district-hero { aspect-ratio: 3/2; }
   .district-intro, .district-sections { padding-left: 22px; padding-right: 22px; }
   .district-section { margin-bottom: 32px; padding-bottom: 32px; }
   .district-section-hd { font-size: 1.1rem; margin-bottom: 8px; }
-  .district-section p { font-size: 0.97rem; line-height: 1.7; margin-bottom: 0.9em; }
+  .district-section p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 0.9em; }
 
   /* ── Other ── */
   .topics-grid { grid-template-columns: 1fr 1fr; }
@@ -1458,7 +1470,7 @@ body {
 
       <div class="hero">
         <div class="hero-left">
-          <h1 class="hero-h1">Your city<br>council,<br>made<br>readable</h1>
+          <h1 class="hero-h1"><span style="display:block">Your city council,</span><span style="display:block">made readable</span></h1>
           <p class="hero-sub">
             CitySmart sends a <span class="ul">weekly briefing</span> to your inbox every Friday covering what your city council or board of supervisors decided — and why it matters. Join your neighbors and see what your government is up to.
           </p>
