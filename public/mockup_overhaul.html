@@ -640,12 +640,9 @@ body {
   justify-content: flex-end;
   padding: 28px 36px;
 }
-/* District pages: text anchored to left side with horizontal gradient */
+/* District pages: no text/gradient overlay — image speaks for itself */
 [id^="screen-d"] .hero-illus-overlay {
-  background: linear-gradient(to right, rgba(10,18,30,.88) 0%, rgba(10,18,30,.5) 42%, transparent 72%);
-  justify-content: center;
-  align-items: flex-start;
-  padding: 32px 44px;
+  display: none;
 }
 [id^="screen-d"] .hero-hed {
   font-size: clamp(1.3rem, 2vw, 1.9rem);
@@ -2502,7 +2499,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Inner%20Richmond/SF_Inner%20Richmond_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D1_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D1_Neighborhood%20Hero.png?v=2" alt="Inner Richmond, Outer Richmond and Jordan Park"
            onerror="this.style.display='none'">
 </picture>
@@ -2542,7 +2539,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Marina%20District/SF_Marina_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D2_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D2_Neighborhood%20Hero.png?v=2" alt="Marina, Cow Hollow and Pacific Heights"
            onerror="this.style.display='none'">
 </picture>
@@ -2582,7 +2579,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/North%20Beach/SF_North%20Beach_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D3_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D3_Neighborhood%20Hero.png?v=2" alt="Chinatown, North Beach and Embarcadero"
            onerror="this.style.display='none'">
 </picture>
@@ -2622,7 +2619,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Outer%20Sunset/SF_Outer%20Sunset_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D4_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D5_Neighborhood%20Hero.png?v=2" alt="Sunset, Golden Gate Park and West Portal"
            onerror="this.style.display='none'">
 </picture>
@@ -2662,7 +2659,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Hayes%20Valley/SF_Hayes%20Valley_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D5_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D4_Neighborhood%20Hero.png?v=2" alt="Hayes Valley, Western Addition and NoPa"
            onerror="this.style.display='none'">
 </picture>
@@ -2702,7 +2699,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/SoMa/SF_SoMa_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D6_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D6_Neighborhood%20Hero.png?v=2" alt="SoMa, Tenderloin, South Beach and Mission Bay"
            onerror="this.style.display='none'">
 </picture>
@@ -2742,7 +2739,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Glen%20Park/SF_Glen%20Park_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D7_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D7_Neighborhood%20Hero.png?v=2" alt="West Portal, Forest Hill and Glen Park"
            onerror="this.style.display='none'">
 </picture>
@@ -2782,7 +2779,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Castro/SF_Castro_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D8_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D8_Neighborhood%20Hero.png?v=2" alt="Castro, Noe Valley and Eureka Valley"
            onerror="this.style.display='none'">
 </picture>
@@ -2822,7 +2819,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Mission%20District/SF_Mission_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D9_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D9_Neighborhood%20Hero.png?v=2" alt="Mission, Bernal Heights and Portola"
            onerror="this.style.display='none'">
 </picture>
@@ -2862,7 +2859,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Bayview/SF_Bayview_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D10_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D10_Neighborhood%20Hero.png?v=2" alt="Bayview, Hunters Point and Potrero Hill"
            onerror="this.style.display='none'">
 </picture>
@@ -2902,7 +2899,7 @@ body {
   <div class="article-wrap">
     <div class="hero-illus">
       <picture>
-  <source media="(max-width: 640px)" srcset="https://tj2099.github.io/sf-bos-newsletter-assets/Excelsior/SF_Excelsior_Mobile.png">
+  <source media="(max-width: 640px)" srcset="assets/CitySmartSF_D11_Neighborhood%20Hero_Mobile.png">
   <img src="assets/CitySmartSF_D11_Neighborhood%20Hero.png?v=2" alt="Excelsior, Outer Mission and Ingleside"
            onerror="this.style.display='none'">
 </picture>
