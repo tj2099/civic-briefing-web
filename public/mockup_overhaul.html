@@ -30,7 +30,7 @@
   --sans:       'Geist', system-ui, -apple-system, sans-serif;
 }
 
-html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; }
 @media (min-width: 1024px) and (max-width: 1599px) {
   html { zoom: 0.9; }
 }
@@ -43,7 +43,7 @@ body {
 }
 
 /* ── SCREENS ── */
-.screen { display: none; min-height: 100vh; flex-direction: column; }
+.screen { display: none; min-height: 100vh; flex-direction: column; overflow-x: hidden; }
 .screen.active { display: flex; }
 
 /* ═══════════════════════════════
@@ -1271,11 +1271,11 @@ body {
 
   /* ── Section / neighborhood page layout ── */
   .section-label-bar { padding: 16px 22px 14px; }
-  .section-title { font-size: clamp(4.2rem, 13vw, 5.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
+  .section-title { font-size: 5rem; font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
   .chart-hed { font-size: 1.45rem; line-height: 1.25; }
   .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
-  .chart-section { margin: 28px -22px; padding: 28px 22px 24px; }
+  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; }
   .article-body { padding-top: 20px; }
   .hero-illus { aspect-ratio: 3/2; width: 100%; }
   /* Hide hero overlay text on mobile — clean image only */
@@ -1296,9 +1296,6 @@ body {
     margin: 0;
     color: inherit;
   }
-
-  /* Charts */
-  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; }
 
   /* Action rows */
   .action-row { grid-template-columns: 60px 1fr; gap: 10px; padding: 16px 0; }
