@@ -1273,15 +1273,17 @@ body {
   .section-label-bar { padding: 16px 22px 14px; }
   .section-title { font-size: 3.8rem; font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
   .chart-hed { font-size: 1.3rem; line-height: 1.25; }
-  .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
+  .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; max-width: 100vw; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
+  .article-body, .article-prose { max-width: 100%; min-width: 0; }
+  .section-desc { max-width: 100%; flex-wrap: wrap; min-width: 0; }
   .chart-section { margin: 28px -22px; padding: 24px 22px 20px; max-width: 100vw; overflow-x: hidden; }
   .chart-section svg { max-width: 100%; height: auto; display: block; }
   .article-body { padding-top: 20px; }
-  /* Hero images: explicit calc() height — bulletproof 3:2 ratio */
-  .hero-illus { position: relative; width: 100%; height: calc((100vw - 44px) * 2 / 3); aspect-ratio: auto; max-width: 100%; }
-  .hero-illus picture { display: block; width: 100%; height: 100%; }
-  .hero-illus img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 40%; position: static; top: auto; left: auto; }
+  /* Hero images: explicit calc() height + district-style absolute img treatment */
+  .hero-illus { position: relative; width: 100%; height: calc((100vw - 44px) * 2 / 3); aspect-ratio: auto; max-width: 100%; overflow: hidden; }
+  .hero-illus picture { display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+  .hero-illus img { position: absolute; top: -8%; left: -8%; width: 116%; height: 116%; object-fit: cover; object-position: 50% 35%; display: block; }
   /* Hide hero overlay text on mobile — clean image only */
   .hero-illus-overlay { display: none; }
 
