@@ -1275,12 +1275,12 @@ body {
   .chart-hed { font-size: 1.3rem; line-height: 1.25; }
   .section-label-bar, .article-wrap { padding-left: 22px; padding-right: 22px; }
   .article-wrap { padding-top: 0; padding-bottom: 48px; }
-  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .chart-section svg { width: 700px; min-width: 700px; }
+  .chart-section { margin: 28px -22px; padding: 24px 22px 20px; }
   .article-body { padding-top: 20px; }
-  .hero-illus { aspect-ratio: 3/2; width: 100%; }
-  /* Match district image treatment: absolute + slight zoom so object-fit fills evenly */
-  .hero-illus img { position: absolute; top: -8%; left: -8%; width: 116%; height: 116%; object-position: 50% 35%; }
+  /* Hero images: padding-top ratio trick — reliable 3:2 in all Safari versions */
+  .hero-illus { position: relative; height: 0; padding-top: 66.67%; aspect-ratio: auto; width: 100%; }
+  .hero-illus picture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block; }
+  .hero-illus img { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; object-fit: cover; object-position: center 40%; }
   /* Hide hero overlay text on mobile — clean image only */
   .hero-illus-overlay { display: none; }
 
