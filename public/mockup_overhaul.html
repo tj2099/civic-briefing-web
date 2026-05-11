@@ -3050,15 +3050,34 @@ function showToast(message, isError) {
       toast.classList.remove('show');
     }, 4500);
   } catch (err) {
-    // Fallback so user always sees confirmation even if toast breaks
     try { alert(message); } catch (e) {}
   }
+}
+
+// Real backend call — POSTs to /api/signup which writes to the Supabase subscribers table.
+// callback(ok: boolean, message: string, status: string)
+function submitSignup(email, cityName, callback) {
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, cityName: cityName || 'San Francisco' })
+  })
+  .then(function(res) { return res.json().then(function(data) { return { status: res.status, data: data }; }); })
+  .then(function(result) {
+    var d = result.data || {};
+    callback(!!d.ok, d.message || 'Signup failed. Please try again.', d.status || 'error');
+  })
+  .catch(function(err) {
+    console.error('signup network error', err);
+    callback(false, 'Network error. Please try again.', 'error');
+  });
 }
 
 function handleEndSubscribe(button) {
   var form = button.closest('.end-sub-form');
   if (!form) return;
   var input = form.querySelector('.end-sub-input');
+  var select = form.querySelector('.end-sub-select');
   if (!input) return;
   var val = input.value.trim();
   if (!val || !val.includes('@')) {
@@ -3066,21 +3085,30 @@ function handleEndSubscribe(button) {
     input.focus();
     return;
   }
+  var cityName = select ? (select.options[select.selectedIndex].textContent || 'San Francisco') : 'San Francisco';
   var originalText = button.textContent;
   button.textContent = '…'; button.disabled = true;
-  setTimeout(function() {
+  submitSignup(val, cityName, function(ok, message) {
     button.textContent = originalText; button.disabled = false;
-    input.value = '';
-    showToast("You're on the list — see you Friday!");
-  }, 600);
+    if (ok) {
+      input.value = '';
+      showToast(message || "You're on the list — see you Friday!");
+    } else {
+      showToast(message || 'Signup failed. Please try again.', true);
+    }
+  });
 }
 
 function handleSignup(e) {
   e.preventDefault();
+  var form = e.target;
   var btn = document.getElementById('sub-btn');
   var ok  = document.getElementById('msg-ok');
   var err = document.getElementById('msg-err');
-  var val = document.getElementById('email-in').value.trim();
+  var input = document.getElementById('email-in');
+  var val = input.value.trim();
+  var citySelect = form.querySelector('select[name="city"]');
+  var cityName = citySelect ? (citySelect.options[citySelect.selectedIndex].textContent || 'San Francisco') : 'San Francisco';
   ok.style.display = err.style.display = 'none';
   if (!val || !val.includes('@')) {
     err.style.display = 'block';
@@ -3088,12 +3116,18 @@ function handleSignup(e) {
     return;
   }
   btn.textContent = '…'; btn.disabled = true;
-  setTimeout(function() {
-    ok.style.display = 'block';
+  submitSignup(val, cityName, function(success, message) {
     btn.textContent = 'Subscribe →'; btn.disabled = false;
-    document.getElementById('email-in').value = '';
-    showToast("You're on the list — see you Friday!");
-  }, 600);
+    if (success) {
+      ok.style.display = 'block';
+      input.value = '';
+      showToast(message || "You're on the list — see you Friday!");
+    } else {
+      err.style.display = 'block';
+      err.textContent = message || 'Signup failed. Please try again.';
+      showToast(message || 'Signup failed. Please try again.', true);
+    }
+  });
 }
 
 function loadIssue(src) {
@@ -3122,21 +3156,28 @@ function handleOverlayClick(e) {
 }
 function handleModalSignup(e) {
   e.preventDefault();
+  var form = e.target;
   var btn = document.getElementById('modal-sub-btn');
   var input = document.getElementById('modal-email-in');
   var val = input.value.trim();
+  var citySelect = form.querySelector('select[name="city"]');
+  var cityName = citySelect ? (citySelect.options[citySelect.selectedIndex].textContent || 'San Francisco') : 'San Francisco';
   if (!val || !val.includes('@')) {
     showToast('Please enter a valid email address', true);
     input.focus();
     return;
   }
   btn.textContent = '…'; btn.disabled = true;
-  setTimeout(function() {
-    closeSubModal();
+  submitSignup(val, cityName, function(ok, message) {
     btn.textContent = 'Subscribe'; btn.disabled = false;
-    input.value = '';
-    showToast("You're on the list — see you Friday!");
-  }, 600);
+    if (ok) {
+      input.value = '';
+      closeSubModal();
+      showToast(message || "You're on the list — see you Friday!");
+    } else {
+      showToast(message || 'Signup failed. Please try again.', true);
+    }
+  });
 }
 
 function toggleMobileNav() {
