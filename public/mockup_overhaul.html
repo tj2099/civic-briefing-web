@@ -3239,5 +3239,10 @@ document.addEventListener('keydown', function(e) {
 
 <div id="global-toast" class="toast" role="status" aria-live="polite"></div>
 
+<!-- Vercel Web Analytics: the React <Analytics /> in app/layout.tsx doesn't fire
+     for this page because middleware.ts rewrites / to this static HTML.
+     This script tag picks up the same insights endpoint Vercel exposes. -->
+<script defer src="/_vercel/insights/script.js"></script>
+
 </body>
 </html>
