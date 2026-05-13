@@ -3012,7 +3012,18 @@ body {
 var TOPIC_SCREENS = ['housing','transit','climate','public-safety','arts'];
 var DISTRICT_SCREENS = ['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11'];
 
-function goTo(id) {
+// Map screen id <-> URL path. Home is at /, every other screen is /<id>.
+function _screenIdToPath(id) {
+  if (!id || id === 'home') return '/';
+  return '/' + id;
+}
+function _pathToScreenId(pathname) {
+  if (!pathname || pathname === '/' || pathname === '') return 'home';
+  return pathname.replace(/^\//, '').replace(/\/$/, '');
+}
+
+// Pure DOM toggle, no URL/history side effects. Used by popstate + init.
+function _showScreen(id) {
   document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
   var screen = document.getElementById('screen-' + id);
   if (screen) { screen.classList.add('active'); }
@@ -3020,6 +3031,22 @@ function goTo(id) {
   updateNavState(id);
   closeMobileNav();
 }
+
+function goTo(id) {
+  _showScreen(id);
+  // Update URL so each section has its own pageview in Vercel Analytics. The
+  // /_vercel/insights/script.js automatically fires a view event on pushState.
+  var path = _screenIdToPath(id);
+  if (location.pathname !== path) {
+    history.pushState({ screen: id }, '', path);
+  }
+}
+
+// Back/forward button — re-show the screen for the URL we're popping to.
+window.addEventListener('popstate', function(e) {
+  var id = (e.state && e.state.screen) || _pathToScreenId(location.pathname);
+  _showScreen(id);
+});
 
 function updateNavState(id) {
   document.querySelectorAll('.nav-topic-link').forEach(function(a) { a.classList.remove('active'); });
@@ -3235,6 +3262,20 @@ document.addEventListener('keydown', function(e) {
   var btn = form.querySelector('.end-sub-btn');
   if (btn) handleEndSubscribe(btn);
 });
+
+// Route from the initial URL so direct hits (or refreshes) to /housing, /d1,
+// /sample, etc. land on the right screen rather than the home screen.
+(function _routeFromInitialUrl() {
+  var initialId = _pathToScreenId(location.pathname);
+  if (initialId !== 'home') {
+    var target = document.getElementById('screen-' + initialId);
+    if (target) {
+      _showScreen(initialId);
+    }
+  }
+  // Always seed history.state so popstate has something to read on the first back.
+  history.replaceState({ screen: initialId }, '', _screenIdToPath(initialId));
+})();
 </script>
 
 <div id="global-toast" class="toast" role="status" aria-live="polite"></div>
