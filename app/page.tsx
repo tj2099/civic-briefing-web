@@ -234,6 +234,10 @@ export default function Home() {
                 Sample issue
               </Link>
               <span className="text-[#D1D5DB]">·</span>
+              <Link href="/contact" className="transition hover:text-[#0F1C2E]">
+                Contact
+              </Link>
+              <span className="text-[#D1D5DB]">·</span>
               <a
                 href="https://twitter.com/CitySmartSF"
                 target="_blank"

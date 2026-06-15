@@ -135,6 +135,10 @@ export default function AboutPage() {
                 About
               </Link>
               <span className="text-[#D1D5DB]">·</span>
+              <Link href="/contact" className="transition hover:text-[#0F1C2E]">
+                Contact
+              </Link>
+              <span className="text-[#D1D5DB]">·</span>
               <span>© 2026 CitySmart</span>
             </div>
           </div>
