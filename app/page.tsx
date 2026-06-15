@@ -6,6 +6,7 @@ import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const FORMSPREE_ID = "mpqebyrj";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,11 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string>("");
   const [submitError, setSubmitError] = useState(false);
+
+  const [contactType, setContactType] = useState<"individual" | "org">("individual");
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [contactError, setContactError] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,6 +54,32 @@ export default function Home() {
       setIsSubmitting(false);
     }
   };
+
+  const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setContactSubmitting(true);
+    setContactError("");
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: new FormData(e.currentTarget),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setContactSubmitted(true);
+      } else {
+        setContactError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setContactError("Something went wrong. Please try again.");
+    } finally {
+      setContactSubmitting(false);
+    }
+  };
+
+  const inputClass = "w-full h-10 border border-[#E2E5EA] bg-white px-3 text-sm text-[#0F1C2E] placeholder-[#8A95A3] outline-none focus:border-[#0F1C2E] transition";
+  const selectClass = "w-full h-10 border border-[#E2E5EA] bg-white px-3 text-sm text-[#0F1C2E] outline-none focus:border-[#0F1C2E] transition";
+  const labelClass = "block text-[10px] font-bold uppercase tracking-[0.08em] text-[#8A95A3] mb-2";
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8F6F2] text-[#0F1C2E]">
@@ -227,6 +259,119 @@ export default function Home() {
 
         </section>
       </main>
+
+      {/* Contact section */}
+      <section className="border-t border-[#E2E5EA]">
+        <div className="mx-auto max-w-[1240px] px-5 sm:px-6 md:px-20 lg:px-24 py-12 md:py-16">
+          <div className="md:grid md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:gap-16">
+
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#EA580C] mb-3">Contact</p>
+              <h2 className="[font-family:var(--font-serif)] text-[clamp(1.8rem,3vw,2.8rem)] font-normal leading-[1.05] tracking-tight mb-6">Get in touch</h2>
+
+              {contactSubmitted ? (
+                <div className="border border-[#E2E5EA] bg-white p-6">
+                  <p className="[font-family:var(--font-serif)] text-[1.2rem] text-[#0F1C2E] mb-2">Message sent</p>
+                  <p className="text-sm text-[#4A5568]">Thanks — we typically respond within 1–2 business days.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit}>
+                  <div className="mb-5">
+                    <p className={labelClass}>I am...</p>
+                    <div className="flex border border-[#E2E5EA] bg-white">
+                      <button type="button" onClick={() => setContactType("individual")}
+                        className={`flex-1 py-2.5 px-4 text-sm transition ${contactType === "individual" ? "bg-[#EA580C] text-white font-medium" : "text-[#0F1C2E] hover:bg-[#F8F6F2]"}`}>
+                        An individual
+                      </button>
+                      <button type="button" onClick={() => setContactType("org")}
+                        className={`flex-1 py-2.5 px-4 text-sm border-l border-[#E2E5EA] transition ${contactType === "org" ? "bg-[#EA580C] text-white font-medium" : "text-[#0F1C2E] hover:bg-[#F8F6F2]"}`}>
+                        An organization
+                      </button>
+                    </div>
+                    <input type="hidden" name="contact_type" value={contactType} />
+                  </div>
+
+                  {contactType === "individual" ? (
+                    <>
+                      <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div><label className={labelClass}>Name</label><input name="name" type="text" placeholder="Your name" required className={inputClass} /></div>
+                        <div><label className={labelClass}>Email</label><input name="email" type="email" placeholder="you@example.com" required className={inputClass} /></div>
+                      </div>
+                      <div className="mb-3">
+                        <label className={labelClass}>Topic</label>
+                        <select name="topic" className={selectClass}>
+                          <option value="">Select a topic...</option>
+                          <option>Story tip or correction</option>
+                          <option>Feedback on coverage</option>
+                          <option>Newsletter question</option>
+                          <option>Something else</option>
+                        </select>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div><label className={labelClass}>Organization</label><input name="organization" type="text" placeholder="Org name" required className={inputClass} /></div>
+                        <div><label className={labelClass}>Your name</label><input name="name" type="text" placeholder="Contact person" required className={inputClass} /></div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div><label className={labelClass}>Email</label><input name="email" type="email" placeholder="contact@yourorg.org" required className={inputClass} /></div>
+                        <div>
+                          <label className={labelClass}>Type of org</label>
+                          <select name="org_type" className={selectClass}>
+                            <option value="">Select...</option>
+                            <option>Neighborhood association</option>
+                            <option>Nonprofit / advocacy group</option>
+                            <option>City agency</option>
+                            <option>Business or chamber</option>
+                            <option>Media / journalism</option>
+                            <option>Academic or research</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="mb-3">
+                        <label className={labelClass}>What you&apos;re interested in</label>
+                        <select name="interest" className={selectClass}>
+                          <option value="">Select...</option>
+                          <option>Content partnership</option>
+                          <option>Sponsorship / underwriting</option>
+                          <option>Data or research collaboration</option>
+                          <option>Event co-hosting</option>
+                          <option>Media or press inquiry</option>
+                          <option>Something else</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+
+                  <div className="mb-5">
+                    <label className={labelClass}>Message</label>
+                    <textarea name="message" required placeholder="Tell us what's on your mind..." rows={4}
+                      className="w-full border border-[#E2E5EA] bg-white px-3 py-3 text-sm text-[#0F1C2E] placeholder-[#8A95A3] leading-relaxed outline-none focus:border-[#0F1C2E] resize-y transition" />
+                  </div>
+
+                  {contactError && <p className="mb-4 text-sm text-red-600">{contactError}</p>}
+
+                  <button type="submit" disabled={contactSubmitting}
+                    className="inline-flex items-center gap-2 bg-[#EA580C] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#C2410C] disabled:opacity-60">
+                    {contactSubmitting ? "Sending..." : "Send message →"}
+                  </button>
+                  <p className="mt-3 text-xs text-[#8A95A3]">We typically respond within 1–2 business days.</p>
+                </form>
+              )}
+            </div>
+
+            <div className="mt-10 md:mt-0">
+              <div className="border-t-2 border-[#EA580C] pt-5">
+                <h3 className="[font-family:var(--font-serif)] text-[1.05rem] font-normal text-[#0F1C2E] mb-3">About CitySmart</h3>
+                <p className="text-sm text-[#4A5568] leading-relaxed">CitySmart is an independent, reader-supported publication covering the San Francisco Board of Supervisors — translating city government into plain English, every week.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       <footer className="border-t border-[#E2E5EA] bg-white">
         <div className="mx-auto max-w-[1320px] px-6 py-8 md:px-10">

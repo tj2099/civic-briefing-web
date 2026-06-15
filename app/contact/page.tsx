@@ -55,12 +55,18 @@ export default function ContactPage() {
           >
             CitySmart
           </Link>
-          <div className="absolute left-6 md:left-10">
+          <div className="absolute left-6 md:left-10 flex items-center gap-5">
             <Link
               href="/about"
               className="text-sm font-medium text-white/70 transition hover:text-white"
             >
               About
+            </Link>
+            <Link
+              href="/contact"
+              className="hidden md:block text-sm font-medium text-white/70 transition hover:text-white"
+            >
+              Contact
             </Link>
           </div>
           <div className="absolute right-6 md:right-10">
