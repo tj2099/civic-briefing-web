@@ -32,5 +32,6 @@ export const config = {
     "/d9",
     "/d10",
     "/d11",
+    "/contact",
   ],
 };
