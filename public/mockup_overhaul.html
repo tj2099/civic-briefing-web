@@ -3539,6 +3539,13 @@ function _showScreen(id) {
   window.scrollTo(0, 0);
   updateNavState(id);
   closeMobileNav();
+  // Re-check iframe height every time sample screen becomes visible —
+  // onload may have fired while the screen was hidden (display:none),
+  // making scrollHeight return 0 and leaving the frame at the wrong height.
+  if (id === 'sample') {
+    var f = document.getElementById('nl-frame');
+    if (f) { setTimeout(function() { resizeFrame(f); }, 50); }
+  }
 }
 
 function goTo(id) {
@@ -3683,11 +3690,38 @@ function loadIssue(src) {
 }
 
 function resizeFrame(f) {
-  try {
-    var h = f.contentDocument.body.scrollHeight;
-    if (h > 100) { f.style.height = h + 'px'; }
-    else { setTimeout(function(){ resizeFrame(f); }, 400); }
-  } catch(e) {}
+  var attempts = 0;
+  function tryResize() {
+    try {
+      var doc = f.contentDocument;
+      if (!doc || !doc.body) { schedule(); return; }
+      // Skip if the parent screen is hidden — scrollHeight will be 0
+      var screen = document.getElementById('screen-sample');
+      if (screen && !screen.classList.contains('active')) { schedule(); return; }
+      var h = doc.body.scrollHeight;
+      if (h > 200) {
+        f.style.height = h + 'px';
+        // Re-check once any pending images inside the iframe finish loading
+        var imgs = doc.querySelectorAll('img');
+        var unloaded = [].filter.call(imgs, function(img) { return !img.complete; });
+        if (unloaded.length) {
+          var done = 0;
+          [].forEach.call(unloaded, function(img) {
+            img.addEventListener('load', function() {
+              if (++done === unloaded.length) {
+                var h2 = doc.body.scrollHeight;
+                if (h2 > parseInt(f.style.height || 0, 10)) f.style.height = h2 + 'px';
+              }
+            });
+          });
+        }
+      } else { schedule(); }
+    } catch(e) { schedule(); }
+  }
+  function schedule() {
+    if (++attempts < 20) setTimeout(tryResize, attempts < 5 ? 300 : 800);
+  }
+  tryResize();
 }
 
 function openSubModal() {
