@@ -1291,6 +1291,96 @@ body {
 .sub-modal-past:hover { color: var(--orange); }
 
 /* ═══════════════════════════════
+   SOURCE PROMPT MODAL
+═══════════════════════════════ */
+.source-prompt-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(15,28,46,.45);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.source-prompt-overlay.open { display: flex; }
+.source-prompt-modal {
+  position: relative;
+  background: var(--white, #fff);
+  max-width: 440px;
+  width: 100%;
+  padding: 32px 32px 28px;
+  border-radius: 4px;
+  box-shadow: 0 24px 64px rgba(15,28,46,.28);
+}
+.source-prompt-close {
+  position: absolute; top: 14px; right: 16px;
+  background: none; border: none; cursor: pointer;
+  color: var(--fg2); font-size: 22px; line-height: 1;
+  padding: 4px; transition: color .12s;
+}
+.source-prompt-close:hover { color: var(--ink); }
+.source-prompt-title {
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 400;
+  color: var(--ink); letter-spacing: -.01em; line-height: 1.3;
+  margin: 0 28px 18px 0;
+}
+.source-prompt-options {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.source-prompt-option {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 10px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color .12s, background .12s;
+}
+.source-prompt-option:hover { border-color: var(--orange); background: #fef5ee; }
+.source-prompt-option input[type="radio"] {
+  width: 16px; height: 16px; accent-color: var(--orange);
+  flex-shrink: 0; cursor: pointer;
+}
+.source-prompt-option span {
+  font-size: 14px; color: var(--ink); line-height: 1.4;
+}
+.source-prompt-org-row {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.source-prompt-org-label {
+  display: block; font-size: 13px; color: var(--fg2); margin-bottom: 8px;
+}
+.source-prompt-org-inputs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.source-prompt-org-inputs input[type="text"] {
+  flex: 1; min-width: 140px; height: 40px;
+  border: 1px solid rgba(15,28,46,.2); border-radius: 3px;
+  padding: 0 12px; font-family: var(--sans);
+  font-size: 14px; color: var(--ink); outline: none;
+}
+.source-prompt-org-inputs input[type="text"]:focus { border-color: var(--orange); }
+.source-prompt-org-done, .source-prompt-org-skip {
+  height: 40px; padding: 0 16px; border-radius: 3px;
+  font-family: var(--sans); font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.source-prompt-org-done {
+  background: var(--ink); border: none; color: #fff;
+}
+.source-prompt-org-done:hover { background: #1e3352; }
+.source-prompt-org-skip {
+  background: none; border: 1px solid var(--border); color: var(--fg2);
+}
+.source-prompt-org-skip:hover { border-color: var(--fg2); color: var(--ink); }
+@media (max-width: 480px) {
+  .source-prompt-modal { padding: 26px 22px 22px; }
+}
+
+/* ═══════════════════════════════
    CITE (inline footnote)
 ═══════════════════════════════ */
 .cite {
@@ -1660,6 +1750,41 @@ body {
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════
+     SOURCE PROMPT MODAL (post-signup)
+════════════════════════════════════════════ -->
+<div class="source-prompt-overlay" id="source-prompt-overlay" onclick="handleSourcePromptOverlayClick(event)">
+  <div class="source-prompt-modal" id="source-prompt-modal" role="dialog" aria-modal="true" aria-labelledby="source-prompt-title">
+    <button class="source-prompt-close" onclick="closeSourcePrompt()" aria-label="Close">&times;</button>
+    <h2 class="source-prompt-title" id="source-prompt-title">You're in! One quick question — how did you find CitySmart?</h2>
+    <div class="source-prompt-options" role="radiogroup" aria-labelledby="source-prompt-title">
+      <label class="source-prompt-option">
+        <input type="radio" name="source-prompt-choice" value="neighborhood_org" onchange="handleSourceOptionChange(this)">
+        <span>A neighborhood or community organization</span>
+      </label>
+      <label class="source-prompt-option">
+        <input type="radio" name="source-prompt-choice" value="forwarded" onchange="handleSourceOptionChange(this)">
+        <span>Someone forwarded it to me</span>
+      </label>
+      <label class="source-prompt-option">
+        <input type="radio" name="source-prompt-choice" value="search" onchange="handleSourceOptionChange(this)">
+        <span>Found it online / search</span>
+      </label>
+      <label class="source-prompt-option">
+        <input type="radio" name="source-prompt-choice" value="other" onchange="handleSourceOptionChange(this)">
+        <span>Other</span>
+      </label>
+    </div>
+    <div class="source-prompt-org-row" id="source-prompt-org-row" hidden>
+      <label class="source-prompt-org-label" for="source-prompt-org-input">Which organization? (optional)</label>
+      <div class="source-prompt-org-inputs">
+        <input type="text" id="source-prompt-org-input" maxlength="120" placeholder="e.g. Corbett Heights Neighbors">
+        <button type="button" class="source-prompt-org-done" onclick="submitSourceOrg(false)">Done</button>
+        <button type="button" class="source-prompt-org-skip" onclick="submitSourceOrg(true)">Skip</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════
      SCREEN: HOME
@@ -3602,10 +3727,49 @@ function showToast(message, variant) {
   }
 }
 
+// First-touch UTM attribution. Stored once per browser, never overwritten,
+// so a later visit (e.g. via search) doesn't steal credit from the channel
+// that actually brought this person here originally. Expires after 30 days.
+(function _captureFirstTouchAttribution() {
+  try {
+    var p = new URLSearchParams(location.search);
+    var existing = localStorage.getItem('cs_attr');
+    if (existing) {
+      var parsed = JSON.parse(existing);
+      if (parsed && parsed.ts && (Date.now() - parsed.ts) > 30 * 24 * 60 * 60 * 1000) {
+        localStorage.removeItem('cs_attr');
+        existing = null;
+      }
+    }
+    if (p.get('utm_source') && !existing) {
+      localStorage.setItem('cs_attr', JSON.stringify({
+        source: p.get('utm_source'),
+        org: p.get('utm_content') || null,
+        ts: Date.now()
+      }));
+    }
+  } catch (e) {}
+})();
+
+function _getFirstTouchAttribution() {
+  try {
+    var raw = localStorage.getItem('cs_attr');
+    if (!raw) return null;
+    var parsed = JSON.parse(raw);
+    if (!parsed || !parsed.ts || (Date.now() - parsed.ts) > 30 * 24 * 60 * 60 * 1000) return null;
+    return parsed;
+  } catch (e) { return null; }
+}
+
 // Real backend call — POSTs to /api/signup which writes to the Supabase subscribers table.
-// callback(ok: boolean, message: string, status: string)
+// callback(ok: boolean, message: string, status: string, subscriberId: string|undefined)
 function submitSignup(email, cityName, callback) {
   var payload = { email: email, cityName: cityName || 'San Francisco' };
+  var attr = _getFirstTouchAttribution();
+  if (attr && attr.source) {
+    payload.sourceTagged = attr.source;
+    if (attr.org) payload.sourceOrg = attr.org;
+  }
   console.log('[signup] POST /api/signup', payload);
   fetch('/api/signup', {
     method: 'POST',
@@ -3616,7 +3780,8 @@ function submitSignup(email, cityName, callback) {
   .then(function(result) {
     console.log('[signup] response', result);
     var d = result.data || {};
-    callback(!!d.ok, d.message || 'Signup failed. Please try again.', d.status || 'error');
+    var subscriberId = d.subscriber && d.subscriber.id;
+    callback(!!d.ok, d.message || 'Signup failed. Please try again.', d.status || 'error', subscriberId);
   })
   .catch(function(err) {
     console.error('[signup] network error', err);
@@ -3639,11 +3804,12 @@ function handleEndSubscribe(button) {
   var cityName = select ? (select.options[select.selectedIndex].textContent || 'San Francisco') : 'San Francisco';
   var originalText = button.textContent;
   button.textContent = '…'; button.disabled = true;
-  submitSignup(val, cityName, function(ok, message, status) {
+  submitSignup(val, cityName, function(ok, message, status, subscriberId) {
     button.textContent = originalText; button.disabled = false;
     if (ok) {
       input.value = '';
       showToast(message || "You're on the list — see you Friday!", status === 'duplicate' ? 'info' : undefined);
+      if (status === 'success' && subscriberId) openSourcePrompt(subscriberId);
     } else {
       showToast(message || 'Signup failed. Please try again.', true);
     }
@@ -3667,13 +3833,14 @@ function handleSignup(e) {
     return;
   }
   btn.textContent = '…'; btn.disabled = true;
-  submitSignup(val, cityName, function(success, message, status) {
+  submitSignup(val, cityName, function(success, message, status, subscriberId) {
     btn.textContent = 'Subscribe →'; btn.disabled = false;
     if (success) {
       ok.style.display = 'block';
       ok.textContent = message || "You're on the list — see you Friday!";
       input.value = '';
       showToast(message || "You're on the list — see you Friday!", status === 'duplicate' ? 'info' : undefined);
+      if (status === 'success' && subscriberId) openSourcePrompt(subscriberId);
     } else {
       err.style.display = 'block';
       err.textContent = message || 'Signup failed. Please try again.';
@@ -3747,16 +3914,108 @@ function handleModalSignup(e) {
     return;
   }
   btn.textContent = '…'; btn.disabled = true;
-  submitSignup(val, cityName, function(ok, message, status) {
+  submitSignup(val, cityName, function(ok, message, status, subscriberId) {
     btn.textContent = 'Subscribe'; btn.disabled = false;
     if (ok) {
       input.value = '';
       closeSubModal();
       showToast(message || "You're on the list — see you Friday!", status === 'duplicate' ? 'info' : undefined);
+      if (status === 'success' && subscriberId) openSourcePrompt(subscriberId);
     } else {
       showToast(message || 'Signup failed. Please try again.', true);
     }
   });
+}
+
+// ═══════════════════════════════════════
+// SOURCE PROMPT MODAL (post-signup attribution)
+// ═══════════════════════════════════════
+var _sourcePromptSubscriberId = null;
+var _sourcePromptLastFocus = null;
+
+function openSourcePrompt(subscriberId) {
+  _sourcePromptSubscriberId = subscriberId;
+  _sourcePromptLastFocus = document.activeElement;
+  document.querySelectorAll('input[name="source-prompt-choice"]').forEach(function(r) { r.checked = false; });
+  var orgRow = document.getElementById('source-prompt-org-row');
+  orgRow.hidden = true;
+  document.getElementById('source-prompt-org-input').value = '';
+  document.getElementById('source-prompt-overlay').classList.add('open');
+  document.addEventListener('keydown', _sourcePromptKeydown);
+  setTimeout(function() {
+    var firstOption = document.querySelector('#source-prompt-modal input[type="radio"]');
+    if (firstOption) firstOption.focus();
+  }, 10);
+}
+
+// writeNoAnswer defaults to true — any dismissal (X, overlay click, Esc) records
+// source='no_answer'. Pass false when an answer was already written just before closing.
+function closeSourcePrompt(writeNoAnswer) {
+  var overlay = document.getElementById('source-prompt-overlay');
+  if (!overlay.classList.contains('open')) return;
+  overlay.classList.remove('open');
+  document.removeEventListener('keydown', _sourcePromptKeydown);
+  if (writeNoAnswer !== false && _sourcePromptSubscriberId) {
+    writeSource(_sourcePromptSubscriberId, 'no_answer', null);
+  }
+  _sourcePromptSubscriberId = null;
+  if (_sourcePromptLastFocus && _sourcePromptLastFocus.focus) {
+    try { _sourcePromptLastFocus.focus(); } catch (e) {}
+  }
+  _sourcePromptLastFocus = null;
+}
+
+function handleSourcePromptOverlayClick(e) {
+  if (e.target === document.getElementById('source-prompt-overlay')) closeSourcePrompt();
+}
+
+function _sourcePromptKeydown(e) {
+  if (e.key === 'Escape') { closeSourcePrompt(); return; }
+  if (e.key !== 'Tab') return;
+  var modal = document.getElementById('source-prompt-modal');
+  var focusable = modal.querySelectorAll('input, button, [tabindex]:not([tabindex="-1"])');
+  var list = Array.prototype.filter.call(focusable, function(el) { return !el.disabled && el.offsetParent !== null; });
+  if (!list.length) return;
+  var first = list[0], last = list[list.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault(); first.focus();
+  }
+}
+
+// Neighborhood-org reveals an inline optional org text field in the same modal
+// (no second step). Every other option writes immediately and closes — single
+// click to answer, no submit button.
+function handleSourceOptionChange(radio) {
+  if (radio.value === 'neighborhood_org') {
+    var orgRow = document.getElementById('source-prompt-org-row');
+    orgRow.hidden = false;
+    var orgInput = document.getElementById('source-prompt-org-input');
+    setTimeout(function() { orgInput.focus(); }, 10);
+    return;
+  }
+  writeSource(_sourcePromptSubscriberId, radio.value, null);
+  closeSourcePrompt(false);
+}
+
+function submitSourceOrg(skip) {
+  var orgInput = document.getElementById('source-prompt-org-input');
+  var org = skip ? '' : orgInput.value.trim().slice(0, 120);
+  writeSource(_sourcePromptSubscriberId, 'neighborhood_org', org || null);
+  closeSourcePrompt(false);
+}
+
+// Best-effort — attribution must never surface an error to an already-subscribed user.
+function writeSource(subscriberId, source, org) {
+  if (!subscriberId) return;
+  var payload = { source: source };
+  if (org) payload.sourceOrg = org;
+  fetch('/api/subscribers/' + encodeURIComponent(subscriberId) + '/source', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function() {});
 }
 
 function toggleMobileNav() {

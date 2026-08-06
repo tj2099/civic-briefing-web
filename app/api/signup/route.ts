@@ -33,11 +33,23 @@ export async function POST(request: Request) {
     typeof payload === "object" && payload !== null && "cityName" in payload
       ? (payload as { cityName?: unknown }).cityName
       : undefined;
+  const sourceTaggedInput =
+    typeof payload === "object" && payload !== null && "sourceTagged" in payload
+      ? (payload as { sourceTagged?: unknown }).sourceTagged
+      : undefined;
+  const sourceOrgInput =
+    typeof payload === "object" && payload !== null && "sourceOrg" in payload
+      ? (payload as { sourceOrg?: unknown }).sourceOrg
+      : undefined;
 
   const email = typeof emailInput === "string" ? emailInput.trim().toLowerCase() : "";
   const cityId =
     typeof cityIdInput === "string" || typeof cityIdInput === "number" ? cityIdInput : "";
   const cityName = typeof cityNameInput === "string" ? cityNameInput.trim() : "";
+  const sourceTagged =
+    typeof sourceTaggedInput === "string" ? sourceTaggedInput.trim().slice(0, 60) : "";
+  const sourceOrg =
+    typeof sourceOrgInput === "string" ? sourceOrgInput.trim().slice(0, 120) : "";
 
   if (!email) {
     return NextResponse.json<SignupResponse>(
@@ -103,6 +115,8 @@ export async function POST(request: Request) {
       email,
       city_id: city.id,
       status: "active",
+      source_tagged: sourceTagged || null,
+      source_org: sourceOrg || null,
     })
     .select("id,email,city_id,created_at")
     .single();
@@ -120,10 +134,12 @@ export async function POST(request: Request) {
         .maybeSingle();
 
       if (existing?.status === "unsubscribed") {
-        const { error: reactivateError } = await supabaseAdmin
+        const { data: reactivated, error: reactivateError } = await supabaseAdmin
           .from("subscribers")
           .update({ status: "active", unsubscribed_at: null })
-          .eq("id", existing.id);
+          .eq("id", existing.id)
+          .select("id,email,city_id,created_at")
+          .single();
 
         if (reactivateError) {
           return NextResponse.json<SignupResponse>(
@@ -132,10 +148,11 @@ export async function POST(request: Request) {
           );
         }
 
-        return NextResponse.json<SignupResponse>({
+        return NextResponse.json({
           ok: true,
           status: "success",
           message: `Welcome back — you're re-subscribed to ${city.name} briefings.`,
+          subscriber: reactivated,
         });
       }
 
